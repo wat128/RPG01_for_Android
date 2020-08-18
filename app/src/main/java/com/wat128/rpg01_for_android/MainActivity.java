@@ -3,13 +3,21 @@ package com.wat128.rpg01_for_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    final float MARGIN = 10.0f;
+
     private TextView textView;
+
+    private Handler handler;
+    private boolean isPress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,41 +26,35 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.text);
 
-        final float margin = 10.0f;
-
         Button buttonUp = findViewById(R.id.up);
-        buttonUp.setOnClickListener(new View.OnClickListener() {
+        buttonUp.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                final float currentY = textView.getTranslationY();
-                textView.setTranslationY( currentY - margin);
-            }
-        });
+            public boolean onTouch(View v, MotionEvent event) {
 
-        Button buttonDown = findViewById(R.id.down);
-        buttonDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final float currentY = textView.getTranslationY();
-                textView.setTranslationY( currentY + margin);
-            }
-        });
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        isPress = true;
 
-        Button buttonLeft = findViewById(R.id.left);
-        buttonLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final float currentX = textView.getTranslationX();
-                textView.setTranslationX( currentX - margin);
-            }
-        });
+                        handler = new Handler();
+                        final Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                if(!isPress)
+                                    return;
 
-        Button buttonRight = findViewById(R.id.right);
-        buttonRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final float currentX = textView.getTranslationX();
-                textView.setTranslationX( currentX + margin);
+                                final float currentY = textView.getTranslationY();
+                                textView.setTranslationY( currentY - MARGIN);
+
+                                handler.postDelayed(this, 10L);
+                            }
+                        };
+                        handler.post(runnable);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        isPress = false;
+                        break;
+                }
+                return false;
             }
         });
     }
