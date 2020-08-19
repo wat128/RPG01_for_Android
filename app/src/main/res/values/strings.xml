@@ -5,4 +5,7 @@
     <string name="down">↓</string>
     <string name="left">←</string>
     <string name="right">→</string>
+
+    <string name="player">主</string>
+
 </resources>

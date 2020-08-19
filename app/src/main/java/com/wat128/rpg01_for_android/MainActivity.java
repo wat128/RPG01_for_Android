@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void move(final Direction direction, final int action) {
 
+        View view = findViewById(R.id.activity_main);
+        final int cx = -(view.getWidth() / 2);
+        final int ex = view.getWidth() / 2;
+        final int cy = -(view.getHeight() / 2);
+        final int ey = view.getWidth() / 2;
+
         switch(action){
             case MotionEvent.ACTION_DOWN:
                 _pressed = true;
@@ -73,26 +80,51 @@ public class MainActivity extends AppCompatActivity {
                 final Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
-                        if(!_pressed)
+                        if( !_pressed )
                             return;
 
                         final float curPos;
-                        switch (direction) {
+                        final float offset;
+                        switch ( direction ) {
                             case Up:
                                 curPos = _textView.getTranslationY();
-                                _textView.setTranslationY( curPos - MARGIN);
+                                offset = curPos - MARGIN;
+
+                                if(cy <= offset)
+                                    _textView.setTranslationY( offset );
+                                else
+                                    _textView.setTranslationY( cy );
+
                                 break;
                             case Down:
                                 curPos = _textView.getTranslationY();
-                                _textView.setTranslationY( curPos + MARGIN);
+                                offset = curPos + MARGIN;
+
+                                if(ey >= offset)
+                                    _textView.setTranslationY( offset );
+                                else
+                                    _textView.setTranslationY( ey );
+
                                 break;
                             case Left:
                                 curPos = _textView.getTranslationX();
-                                _textView.setTranslationX( curPos - MARGIN);
+                                offset = curPos - MARGIN;
+
+                                if(cx <= offset)
+                                    _textView.setTranslationX( offset );
+                                else
+                                    _textView.setTranslationX( cx );
+
                                 break;
                             case Right:
                                 curPos = _textView.getTranslationX();
-                                _textView.setTranslationX( curPos + MARGIN);
+                                offset = curPos + MARGIN;
+
+                                if(ex >= offset)
+                                    _textView.setTranslationX( offset );
+                                else
+                                    _textView.setTranslationX( ex );
+
                                 break;
                         }
 
@@ -100,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
 
-                _handler.post(runnable);
+                _handler.post( runnable );
                 break;
 
             case MotionEvent.ACTION_UP:
