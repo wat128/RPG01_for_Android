@@ -9,17 +9,24 @@ import android.widget.Button;
 
 import static com.wat128.rpg01_for_android.Player.Direction.*;
 
+// onWindowFocusChanged()以降で参照すること
+class ScreenArea {
+    static int cx;
+    static int ex;
+    static int cy;
+    static int ey;
+}
+
 public class MainActivity extends AppCompatActivity {
 
-    private Player player;
-    int cx, ex, cy, ey;
+    private Player _player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        player = new Player(findViewById(R.id.player));
+        _player = new Player(findViewById(R.id.player));
 
         Button buttonUp = findViewById(R.id.up);
         buttonUp.setOnTouchListener(_ButtonListener);
@@ -42,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
             final int action = event.getAction();
 
             switch (v.getId()) {
-                case R.id.up:       movePlayer(Up, action, cy);     break;
-                case R.id.down:     movePlayer(Down, action, ey);   break;
-                case R.id.left:     movePlayer(Left, action, cx);   break;
-                case R.id.right:    movePlayer(Right, action, ex);  break;
+                case R.id.up:       movePlayer(Up, action, ScreenArea.cy);     break;
+                case R.id.down:     movePlayer(Down, action, ScreenArea.ey);   break;
+                case R.id.left:     movePlayer(Left, action, ScreenArea.cx);   break;
+                case R.id.right:    movePlayer(Right, action, ScreenArea.ex);  break;
             }
 
             return false;
@@ -55,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
     private void movePlayer(final Player.Direction direction, final int action, final int boundary) {
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                player.move(direction, boundary, true);
+                _player.move(direction, boundary, true);
                 break;
 
             case MotionEvent.ACTION_UP:
-                player.move(direction, boundary, false);
+                _player.move(direction, boundary, false);
                 break;
         }
     }
@@ -69,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
 
         View view = findViewById(R.id.activity_main);
-        cx = -(view.getWidth() / 2);
-        ex = view.getWidth() / 2;
-        cy = -(view.getHeight() / 2);
-        ey = view.getWidth() / 2;
+        ScreenArea.cx = -(view.getWidth() / 2);
+        ScreenArea.ex = view.getWidth() / 2;
+        ScreenArea.cy = -(view.getHeight() / 2);
+        ScreenArea.ey = view.getWidth() / 2;
     }
 }

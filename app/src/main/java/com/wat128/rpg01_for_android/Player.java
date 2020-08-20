@@ -14,12 +14,12 @@ public class Player {
         Right
     }
 
-    private View chara;
+    private View _chara;
     private boolean _pressingMoveKey;
 
     public Player(final View img) {
 
-        chara = img;
+        _chara = img;
     }
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {
@@ -37,43 +37,43 @@ public class Player {
                 final float offset;
                 switch ( direction ) {
                     case Up:
-                        curPos = chara.getTranslationY();
+                        curPos = _chara.getTranslationY();
                         offset = curPos - SPEED;
 
                         if(boundary <= offset)
-                            chara.setTranslationY( offset );
+                            _chara.setTranslationY( offset );
                         else
-                            chara.setTranslationY( boundary );
+                            _chara.setTranslationY( boundary );
 
                         break;
                     case Down:
-                        curPos = chara.getTranslationY();
+                        curPos = _chara.getTranslationY();
                         offset = curPos + SPEED;
 
                         if(boundary >= offset)
-                            chara.setTranslationY( offset );
+                            _chara.setTranslationY( offset );
                         else
-                            chara.setTranslationY( boundary );
+                            _chara.setTranslationY( boundary );
 
                         break;
                     case Left:
-                        curPos = chara.getTranslationX();
+                        curPos = _chara.getTranslationX();
                         offset = curPos - SPEED;
 
                         if(boundary <= offset)
-                            chara.setTranslationX( offset );
+                            _chara.setTranslationX( offset );
                         else
-                            chara.setTranslationX( boundary );
+                            _chara.setTranslationX( boundary );
 
                         break;
                     case Right:
-                        curPos = chara.getTranslationX();
+                        curPos = _chara.getTranslationX();
                         offset = curPos + SPEED;
 
                         if(boundary >= offset)
-                            chara.setTranslationX( offset );
+                            _chara.setTranslationX( offset );
                         else
-                            chara.setTranslationX( boundary );
+                            _chara.setTranslationX( boundary );
 
                         break;
                 }
