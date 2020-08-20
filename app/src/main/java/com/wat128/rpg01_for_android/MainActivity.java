@@ -3,36 +3,23 @@ package com.wat128.rpg01_for_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import static com.wat128.rpg01_for_android.Player.Direction.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    final float MARGIN = 10.0f;
-
-    private enum Direction {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
-    private TextView _textView;
-    private Handler _handler;
-    private boolean _pressed;
-
+    private Player player;
+    int cx, ex, cy, ey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _textView = findViewById(R.id.text);
+        player = new Player(findViewById(R.id.player));
 
         Button buttonUp = findViewById(R.id.up);
         buttonUp.setOnTouchListener(_ButtonListener);
@@ -45,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonRight = findViewById(R.id.right);
         buttonRight.setOnTouchListener(_ButtonListener);
-        
+
     }
 
     private View.OnTouchListener _ButtonListener = new View.OnTouchListener() {
@@ -55,90 +42,36 @@ public class MainActivity extends AppCompatActivity {
             final int action = event.getAction();
 
             switch (v.getId()) {
-                case R.id.up:       move(Direction.Up, action);     break;
-                case R.id.down:     move(Direction.Down, action);   break;
-                case R.id.left:     move(Direction.Left, action);   break;
-                case R.id.right:    move(Direction.Right, action);  break;
+                case R.id.up:       movePlayer(Up, action, cy);     break;
+                case R.id.down:     movePlayer(Down, action, ey);   break;
+                case R.id.left:     movePlayer(Left, action, cx);   break;
+                case R.id.right:    movePlayer(Right, action, ex);  break;
             }
 
             return false;
         }
     };
 
-    private void move(final Direction direction, final int action) {
-
-        View view = findViewById(R.id.activity_main);
-        final int cx = -(view.getWidth() / 2);
-        final int ex = view.getWidth() / 2;
-        final int cy = -(view.getHeight() / 2);
-        final int ey = view.getWidth() / 2;
-
+    private void movePlayer(final Player.Direction direction, final int action, final int boundary) {
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                _pressed = true;
-
-                _handler = new Handler();
-                final Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        if( !_pressed )
-                            return;
-
-                        final float curPos;
-                        final float offset;
-                        switch ( direction ) {
-                            case Up:
-                                curPos = _textView.getTranslationY();
-                                offset = curPos - MARGIN;
-
-                                if(cy <= offset)
-                                    _textView.setTranslationY( offset );
-                                else
-                                    _textView.setTranslationY( cy );
-
-                                break;
-                            case Down:
-                                curPos = _textView.getTranslationY();
-                                offset = curPos + MARGIN;
-
-                                if(ey >= offset)
-                                    _textView.setTranslationY( offset );
-                                else
-                                    _textView.setTranslationY( ey );
-
-                                break;
-                            case Left:
-                                curPos = _textView.getTranslationX();
-                                offset = curPos - MARGIN;
-
-                                if(cx <= offset)
-                                    _textView.setTranslationX( offset );
-                                else
-                                    _textView.setTranslationX( cx );
-
-                                break;
-                            case Right:
-                                curPos = _textView.getTranslationX();
-                                offset = curPos + MARGIN;
-
-                                if(ex >= offset)
-                                    _textView.setTranslationX( offset );
-                                else
-                                    _textView.setTranslationX( ex );
-
-                                break;
-                        }
-
-                        _handler.postDelayed(this, 10L);
-                    }
-                };
-
-                _handler.post( runnable );
+                player.move(direction, boundary, true);
                 break;
 
             case MotionEvent.ACTION_UP:
-                _pressed = false;
+                player.move(direction, boundary, false);
                 break;
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        View view = findViewById(R.id.activity_main);
+        cx = -(view.getWidth() / 2);
+        ex = view.getWidth() / 2;
+        cy = -(view.getHeight() / 2);
+        ey = view.getWidth() / 2;
     }
 }
