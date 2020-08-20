@@ -8,16 +8,17 @@ class MoveHandler {
     Runnable runnable;
 }
 
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 public class Player {
 
     final float SPEED = 10.0f;
 
-    public enum Direction {
-        Up,
-        Down,
-        Left,
-        Right
-    }
 
     private View _chara;
     private MoveHandler _moveHandler;
@@ -37,6 +38,7 @@ public class Player {
                 @Override
                 public void run() {
                     setPos(direction, boundary);
+                    Encounter.encounterIntervalAccum++;
                     _moveHandler.handler.postDelayed(this, 10L);
                 }
             };

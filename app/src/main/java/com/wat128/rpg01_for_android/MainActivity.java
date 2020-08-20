@@ -2,16 +2,14 @@ package com.wat128.rpg01_for_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.Random;
-
-import static com.wat128.rpg01_for_android.Player.Direction.*;
+import static com.wat128.rpg01_for_android.Direction.*;
 
 // onWindowFocusChanged()以降で参照すること
 class ScreenArea {
@@ -21,9 +19,15 @@ class ScreenArea {
     static int ey;
 }
 
+class EncountObserveHandler {
+    Handler handler;
+    Runnable runnable;
+}
+
 public class MainActivity extends AppCompatActivity {
 
     private Player _player;
+    EncountObserveHandler _encounterObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
         Button buttonRight = findViewById(R.id.right);
         buttonRight.setOnTouchListener(_ButtonListener);
 
+        _encounterObserver = new EncountObserveHandler();
+        _encounterObserver.handler = new Handler();
+        _encounterObserver.runnable = new Runnable() {
+            int count = 0;
+            @Override
+            public void run() {
+                if(Encounter.isAccumMoreThanEncounterInterval()) {
+                        Log.d("debug", "スラ○ムがあらわれた！");
+                }
+                _encounterObserver.handler.postDelayed(this, 100L);
+            }
+        };
+        _encounterObserver.handler.post(_encounterObserver.runnable);
     }
 
     private View.OnTouchListener _ButtonListener = new View.OnTouchListener() {
@@ -63,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void movePlayer(final Player.Direction direction, final int action, final int boundary) {
+    private void movePlayer(final Direction direction, final int action, final int boundary) {
 
         switch(action){
             case MotionEvent.ACTION_DOWN:
