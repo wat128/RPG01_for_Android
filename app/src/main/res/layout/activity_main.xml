@@ -51,4 +51,14 @@
         app:layout_constraintStart_toEndOf="@id/up"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <TextView
+        android:id="@+id/msg_box"
+        android:layout_width="230dp"
+        android:layout_height="86dp"
+        android:background="#ddd"
+        app:layout_constraintBottom_toBottomOf="@+id/right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/right"
+        app:layout_constraintTop_toTopOf="@+id/up" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

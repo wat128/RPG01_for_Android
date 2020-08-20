@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonRight = findViewById(R.id.right);
         buttonRight.setOnTouchListener(_ButtonListener);
+        
     }
 
     private View.OnTouchListener _ButtonListener = new View.OnTouchListener() {
