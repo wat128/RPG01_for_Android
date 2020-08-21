@@ -1,6 +1,7 @@
 package com.wat128.rpg01_for_android;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 class MoveHandler {
@@ -37,6 +38,7 @@ public class Player {
             _moveHandler.runnable = new Runnable() {
                 @Override
                 public void run() {
+                    Log.d("debug", String.valueOf(Encounter.encounterIntervalAccum));
                     setPos(direction, boundary);
                     Encounter.encounterIntervalAccum++;
                     _moveHandler.handler.postDelayed(this, 10L);
@@ -47,7 +49,11 @@ public class Player {
         else{
             _moveHandler.handler.removeCallbacks(_moveHandler.runnable);
         }
+    }
 
+    public void stopMoving() {
+        if(_moveHandler.handler != null)
+            _moveHandler.handler.removeCallbacks(_moveHandler.runnable);
     }
 
     private void setPos(final Direction direction, final int boundary) {

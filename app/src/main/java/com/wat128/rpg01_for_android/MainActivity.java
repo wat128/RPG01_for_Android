@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 if(Encounter.isAccumMoreThanEncounterInterval()) {
                     Log.d("debug", "スラ○ムがあらわれた！");
 
+                    _player.stopMoving();
                     Intent intent = new Intent(MainActivity.this, Battle.class);
                     startActivityForResult(intent, BATTLE_RESULT);
                 }
