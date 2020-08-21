@@ -8,6 +8,10 @@
 
     <string name="player">主</string>
     <string name="attack">こうげき</string>
+    <string name="magic">じゅもん</string>
     <string name="escape">にげる</string>
+    <string name="item">どうぐ</string>
+    <string name="hp">HP</string>
+    <string name="mp">MP</string>
 
 </resources>
