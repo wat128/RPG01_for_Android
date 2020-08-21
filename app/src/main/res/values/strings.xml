@@ -7,5 +7,7 @@
     <string name="right">→</string>
 
     <string name="player">主</string>
+    <string name="attack">こうげき</string>
+    <string name="escape">にげる</string>
 
 </resources>

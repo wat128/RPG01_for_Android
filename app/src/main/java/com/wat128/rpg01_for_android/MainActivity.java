@@ -1,7 +1,9 @@
 package com.wat128.rpg01_for_android;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -25,6 +27,8 @@ class EncountObserveHandler {
 }
 
 public class MainActivity extends AppCompatActivity {
+
+    private final int BATTLE_RESULT = 1000;
 
     private Player _player;
     EncountObserveHandler _encounterObserver;
@@ -51,11 +55,13 @@ public class MainActivity extends AppCompatActivity {
         _encounterObserver = new EncountObserveHandler();
         _encounterObserver.handler = new Handler();
         _encounterObserver.runnable = new Runnable() {
-            int count = 0;
             @Override
             public void run() {
                 if(Encounter.isAccumMoreThanEncounterInterval()) {
-                        Log.d("debug", "スラ○ムがあらわれた！");
+                    Log.d("debug", "スラ○ムがあらわれた！");
+
+                    Intent intent = new Intent(MainActivity.this, Battle.class);
+                    startActivityForResult(intent, BATTLE_RESULT);
                 }
                 _encounterObserver.handler.postDelayed(this, 100L);
             }
@@ -102,5 +108,10 @@ public class MainActivity extends AppCompatActivity {
         ScreenArea.ex = view.getWidth() / 2;
         ScreenArea.cy = -(view.getHeight() / 2);
         ScreenArea.ey = view.getWidth() / 2;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
