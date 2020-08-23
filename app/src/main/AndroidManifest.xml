@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Field"></activity>
         <activity android:name=".Battle"></activity>
 
     </application>
