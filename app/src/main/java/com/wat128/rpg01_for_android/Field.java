@@ -10,7 +10,13 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import static com.wat128.rpg01_for_android.Direction.*;
+import static com.wat128.rpg01_for_android.EnemyList.*;
 
 class EncountObserveHandler {
     Handler handler;
@@ -23,6 +29,8 @@ public class Field extends AppCompatActivity {
 
     private Player _player;
     private EncountObserveHandler _encounterObserver;
+
+    private List<Integer> _enemyIds = new ArrayList<>(Arrays.asList(SLIME, NINE_TAILED_FOX)); // TODO:テスト用
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +59,13 @@ public class Field extends AppCompatActivity {
                 if(Encounter.isAccumMoreThanEncounterInterval()) {
                     _player.stopMoving();
                     Intent intent = new Intent(Field.this, Battle.class);
+
+                    Random random = new Random();
+                    int enemyId = random.nextInt(_enemyIds.size());
+                    intent.putExtra(
+                            "Enemy_Data",
+                            _enemyIds.get(enemyId));
+
                     startActivityForResult(intent, BATTLE_RESULT);
                 }
                 _encounterObserver.handler.postDelayed(this, 100L);

@@ -21,15 +21,16 @@ public class Player {
 
     final float SPEED = 10.0f;
 
-
     private View _chara;
     private MoveHandler _moveHandler;
+
+    private Status _status;
 
     public Player(final View img) {
 
         _chara = img;
         _moveHandler = new MoveHandler();
-
+        _status = new playerStatus();
     }
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {
