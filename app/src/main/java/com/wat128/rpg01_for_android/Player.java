@@ -1,5 +1,6 @@
 package com.wat128.rpg01_for_android;
 
+import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -60,45 +61,50 @@ public class Player {
 
         final float curPos;
         final float offset;
+
         switch (direction) {
             case Up:
                 curPos = _chara.getTranslationY();
                 offset = curPos - SPEED;
+                final float chara_cy = offset - _chara.getHeight() / 2.0f;
 
-                if (boundary <= offset)
+                if (boundary <= chara_cy)
                     _chara.setTranslationY(offset);
                 else
-                    _chara.setTranslationY(boundary);
+                    _chara.setTranslationY(boundary + _chara.getHeight() / 2.0f);
 
                 break;
             case Down:
                 curPos = _chara.getTranslationY();
                 offset = curPos + SPEED;
+                final float chara_ey = offset + _chara.getHeight() / 2.0f;
 
-                if (boundary >= offset)
+                if (boundary >= chara_ey)
                     _chara.setTranslationY(offset);
                 else
-                    _chara.setTranslationY(boundary);
+                    _chara.setTranslationY(boundary - _chara.getHeight() / 2.0f);
 
                 break;
             case Left:
                 curPos = _chara.getTranslationX();
                 offset = curPos - SPEED;
+                final float chara_cx = offset - _chara.getWidth() / 2.0f;
 
-                if (boundary <= offset)
+                if (boundary <= chara_cx)
                     _chara.setTranslationX(offset);
                 else
-                    _chara.setTranslationX(boundary);
+                    _chara.setTranslationX(boundary + _chara.getWidth() / 2.0f);
 
                 break;
             case Right:
                 curPos = _chara.getTranslationX();
                 offset = curPos + SPEED;
+                final float chara_ex = offset + _chara.getWidth() / 2.0f;
 
-                if (boundary >= offset)
+                if (boundary >= chara_ex)
                     _chara.setTranslationX(offset);
                 else
-                    _chara.setTranslationX(boundary);
+                    _chara.setTranslationX(boundary - _chara.getWidth() / 2.0f);
 
                 break;
         }
