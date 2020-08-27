@@ -21,6 +21,11 @@ public class Battle extends AppCompatActivity {
 
     private ArrayList<Battler> _battler;
 
+    private Button _btnAttack;
+    private Button _btnMagic;
+    private Button _btnEscape;
+    private Button _btnItem;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +54,8 @@ public class Battle extends AppCompatActivity {
         final TextView msgBoxView = findViewById(R.id.msg_box);
         msgBoxView.setText(getString(R.string.appear, enemy.getName()));
 
-        Button btnAttack = findViewById(R.id.attack);
-        btnAttack.setOnClickListener(new View.OnClickListener() {
+        _btnAttack = findViewById(R.id.attack);
+        _btnAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -95,6 +100,7 @@ public class Battle extends AppCompatActivity {
 
                         msgBoxView.append(getString(R.string.battleFinished, off.getName()));
 
+                        buttonEnabled();
                         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -111,13 +117,36 @@ public class Battle extends AppCompatActivity {
             }
         });
 
-        Button btnEscape = findViewById(R.id.escape);
-        btnEscape.setOnClickListener(new View.OnClickListener() {
+        _btnMagic = findViewById(R.id.magic);
+        _btnMagic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
 
+        _btnEscape = findViewById(R.id.escape);
+        _btnEscape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        _btnItem = findViewById(R.id.item);
+        _btnItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+    }
+
+    private void buttonEnabled() {
+        _btnAttack.setEnabled(false);
+        _btnMagic.setEnabled(false);
+        _btnEscape.setEnabled(false);
+        _btnItem.setEnabled(false);
     }
 }
