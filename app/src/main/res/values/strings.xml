@@ -21,5 +21,7 @@
     <string name="level_val">100</string>
 
     <string name="appear">%1$sがあらわれた！</string>
+    <string name="battleFinished">%1$sの勝利です</string>
+    <string name="damageMsg">%1$sの攻撃！\n%2$sに%3$dのダメージ！\n</string>
 
 </resources>

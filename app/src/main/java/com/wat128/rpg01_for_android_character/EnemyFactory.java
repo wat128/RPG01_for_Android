@@ -11,14 +11,14 @@ public class EnemyFactory {
 
         switch(enemyId) {
             case SLIME:
-                enemy = new EnemyData(new SlimeStatus());
+                enemy = new Enemy(new SlimeStatus());
                 break;
             case NINE_TAILED_FOX:
-                enemy = new EnemyData(new NineTailStatus());
+                enemy = new Enemy(new NineTailStatus());
                 break;
             default:
                 Log.d("debug", "EnemyFactory Failed");
-                enemy = new EnemyData(new SlimeStatus());
+                enemy = new Enemy(new SlimeStatus());
                 break;
         }
 

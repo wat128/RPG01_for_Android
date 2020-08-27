@@ -13,7 +13,7 @@ class MoveHandler {
     Runnable runnable;
 }
 
-public class Player {
+public class Player extends Battler {
 
     private static class PlayerHolder {
         private static final Player INSTANCE = new Player();
@@ -23,11 +23,10 @@ public class Player {
 
     private View _chara;
     private MoveHandler _moveHandler;
-    private Status _status;
 
     private Player() {
+        super(new playerStatus());
         _moveHandler = new MoveHandler();
-        _status = new playerStatus();
     }
 
     public static Player getInstance() {
@@ -35,24 +34,6 @@ public class Player {
     }
 
     public void setImageView(final View img) { _chara = img; }
-
-    public String getName()     { return _status.name; }
-    public int getImageId()     { return _status.imageId; }
-    public int getId()          { return _status.id; }
-    public int getLv()          { return _status.lv; }
-    public int getExp()         { return _status.exp; }
-    public int getStrength()    { return _status.strength; }
-    public int getAgility()     { return _status.agility; }
-    public int getResilience()  { return _status.resilience; }
-    public int getWisdom()      { return _status.wisdom; }
-    public int getLuck()        { return _status.luck; }
-    public int getMaxHp()       { return _status.maxHp; }
-    public int getMaxMp()       { return _status.maxMp; }
-    public int getHp()          { return _status.hp; }
-    public int getMp()          { return _status.mp; }
-    public int getAttack()      { return _status.attack; }
-    public int getDefence()     { return _status.defence; }
-
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {
 
