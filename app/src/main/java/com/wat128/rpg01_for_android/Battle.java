@@ -38,13 +38,13 @@ public class Battle extends AppCompatActivity {
         Player player = Player.getInstance();
         Status pStatus = player.getStatus();
 
-        TextView hpView = findViewById(R.id.hp);
+        TextView hpView = findViewById(R.id.hp_val);
         hpView.setText(String.valueOf(pStatus.hp));
 
-        TextView mpView = findViewById(R.id.mp);
+        TextView mpView = findViewById(R.id.mp_val);
         mpView.setText(String.valueOf(pStatus.mp));
 
-        TextView lvView = findViewById(R.id.level);
+        TextView lvView = findViewById(R.id.level_val);
         lvView.setText(String.valueOf(pStatus.lv));
 
         final int enemyId = intent.getIntExtra("Enemy_Data", 0);

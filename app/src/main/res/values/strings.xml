@@ -13,7 +13,11 @@
     <string name="magic">じゅもん</string>
     <string name="escape">にげる</string>
     <string name="item">どうぐ</string>
-    <string name="hp">HP</string>
-    <string name="mp">MP</string>
+    <string name="hp_">HP:</string>
+    <string name="mp_">MP:</string>
+    <string name="level_">LV:</string>
+    <string name="hp_val">999</string>
+    <string name="mp_val">999</string>
+    <string name="level_val">100</string>
 
 </resources>
