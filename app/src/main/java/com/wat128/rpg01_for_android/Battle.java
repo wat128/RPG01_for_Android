@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +34,18 @@ public class Battle extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
+
+        Player player = Player.getInstance();
+        Status pStatus = player.getStatus();
+
+        TextView hpView = findViewById(R.id.hp);
+        hpView.setText(String.valueOf(pStatus.hp));
+
+        TextView mpView = findViewById(R.id.mp);
+        mpView.setText(String.valueOf(pStatus.mp));
+
+        TextView lvView = findViewById(R.id.level);
+        lvView.setText(String.valueOf(pStatus.lv));
 
         final int enemyId = intent.getIntExtra("Enemy_Data", 0);
         Enemy enemy = EnemyFactory.create(enemyId);

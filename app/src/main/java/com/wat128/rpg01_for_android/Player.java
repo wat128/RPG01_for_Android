@@ -1,6 +1,5 @@
 package com.wat128.rpg01_for_android;
 
-import android.graphics.Rect;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -19,18 +18,31 @@ enum Direction {
 
 public class Player {
 
-    final float SPEED = 10.0f;
+    private static class PlayerHolder {
+        private static final Player INSTANCE = new Player();
+    }
+
+    private final float SPEED = 10.0f;
 
     private View _chara;
     private MoveHandler _moveHandler;
-
     private Status _status;
 
-    public Player(final View img) {
-
-        _chara = img;
+    private Player() {
         _moveHandler = new MoveHandler();
         _status = new playerStatus();
+    }
+
+    public static Player getInstance() {
+        return PlayerHolder.INSTANCE;
+    }
+
+    public void setImageView(final View img) {
+        _chara = img;
+    }
+
+    public Status getStatus() {
+        return _status;
     }
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {

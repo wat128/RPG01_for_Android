@@ -27,7 +27,6 @@ public class Field extends AppCompatActivity {
 
     private final int BATTLE_RESULT = 1000;
 
-    private Player _player;
     private EncountObserveHandler _encounterObserver;
 
     private List<Integer> _enemyIds = new ArrayList<>(Arrays.asList(SLIME, NINE_TAILED_FOX)); // TODO:テスト用
@@ -37,7 +36,8 @@ public class Field extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filed);
 
-        _player = new Player(findViewById(R.id.player));
+        final Player player = Player.getInstance();
+        player.setImageView(findViewById(R.id.player));
 
         Button buttonUp = findViewById(R.id.up);
         buttonUp.setOnTouchListener(_ButtonListener);
@@ -57,7 +57,7 @@ public class Field extends AppCompatActivity {
             @Override
             public void run() {
                 if(Encounter.isAccumMoreThanEncounterInterval()) {
-                    _player.stopMoving();
+                    player.stopMoving();
                     Intent intent = new Intent(Field.this, Battle.class);
 
                     Random random = new Random();
@@ -93,13 +93,14 @@ public class Field extends AppCompatActivity {
 
     private void movePlayer(final Direction direction, final int action, final int boundary) {
 
+        final Player player = Player.getInstance();
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                _player.move(direction, boundary, true);
+                player.move(direction, boundary, true);
                 break;
 
             case MotionEvent.ACTION_UP:
-                _player.move(direction, boundary, false);
+                player.move(direction, boundary, false);
                 break;
         }
     }
