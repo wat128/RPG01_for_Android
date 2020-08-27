@@ -20,4 +20,6 @@
     <string name="mp_val">999</string>
     <string name="level_val">100</string>
 
+    <string name="appear">%1$sがあらわれた！</string>
+
 </resources>
