@@ -54,5 +54,7 @@ public class Battle extends AppCompatActivity {
         ImageView enemyImage = findViewById(R.id.enemyImage);
         enemyImage.setImageResource(enemy.getImageId());
 
+        TextView msgBoxView = findViewById(R.id.msg_box);
+        msgBoxView.setText("モンスターがあらわれた");
     }
 }
