@@ -1,4 +1,4 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_scene;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,17 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wat128.rpg01_for_android.R;
+import com.wat128.rpg01_for_android.Util.*;
+import com.wat128.rpg01_for_android_character.Player;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.wat128.rpg01_for_android.Direction.*;
-import static com.wat128.rpg01_for_android.EnemyList.*;
+import static com.wat128.rpg01_for_android.Util.Direction.*;
+import static com.wat128.rpg01_for_android_character.EnemyList.*;
 
 class EncountObserveHandler {
     Handler handler;

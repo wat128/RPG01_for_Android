@@ -1,4 +1,4 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_scene;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.wat128.rpg01_for_android.R;
+import com.wat128.rpg01_for_android_character.*;
 
 public class Battle extends AppCompatActivity {
 
@@ -36,16 +39,15 @@ public class Battle extends AppCompatActivity {
         Intent intent = getIntent();
 
         Player player = Player.getInstance();
-        Status pStatus = player.getStatus();
 
         TextView hpView = findViewById(R.id.hp_val);
-        hpView.setText(String.valueOf(pStatus.hp));
+        hpView.setText(String.valueOf(player.getHp()));
 
         TextView mpView = findViewById(R.id.mp_val);
-        mpView.setText(String.valueOf(pStatus.mp));
+        mpView.setText(String.valueOf(player.getMp()));
 
         TextView lvView = findViewById(R.id.level_val);
-        lvView.setText(String.valueOf(pStatus.lv));
+        lvView.setText(String.valueOf(player.getLv()));
 
         final int enemyId = intent.getIntExtra("Enemy_Data", 0);
         Enemy enemy = EnemyFactory.create(enemyId);

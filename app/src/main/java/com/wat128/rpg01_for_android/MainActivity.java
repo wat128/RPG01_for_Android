@@ -5,14 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-// onWindowFocusChanged()以降で参照すること
-class ScreenArea {
-    static int cx;
-    static int ex;
-    static int cy;
-    static int ey;
-}
+import com.wat128.rpg01_for_android.Util.*;
+import com.wat128.rpg01_for_android_scene.*;
 
 public class MainActivity extends AppCompatActivity {
 

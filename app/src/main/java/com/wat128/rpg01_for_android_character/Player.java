@@ -1,19 +1,16 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_character;
 
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
+import com.wat128.rpg01_for_android.Util.*;
+import com.wat128.rpg01_for_android_scene.Encounter;
+
+
 class MoveHandler {
     Handler handler;
     Runnable runnable;
-}
-
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right
 }
 
 public class Player {
@@ -37,13 +34,25 @@ public class Player {
         return PlayerHolder.INSTANCE;
     }
 
-    public void setImageView(final View img) {
-        _chara = img;
-    }
+    public void setImageView(final View img) { _chara = img; }
 
-    public Status getStatus() {
-        return _status;
-    }
+    public String getName()     { return _status.name; }
+    public int getImageId()     { return _status.imageId; }
+    public int getId()          { return _status.id; }
+    public int getLv()          { return _status.lv; }
+    public int getExp()         { return _status.exp; }
+    public int getStrength()    { return _status.strength; }
+    public int getAgility()     { return _status.agility; }
+    public int getResilience()  { return _status.resilience; }
+    public int getWisdom()      { return _status.wisdom; }
+    public int getLuck()        { return _status.luck; }
+    public int getMaxHp()       { return _status.maxHp; }
+    public int getMaxMp()       { return _status.maxMp; }
+    public int getHp()          { return _status.hp; }
+    public int getMp()          { return _status.mp; }
+    public int getAttack()      { return _status.attack; }
+    public int getDefence()     { return _status.defence; }
+
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {
 

@@ -1,14 +1,9 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_character;
 
 public interface Enemy {
 
     void performAction();
     int getImageId();
-}
-
-class EnemyList {
-    public static final int SLIME = 10;
-    public static final int NINE_TAILED_FOX = 30;
 }
 
 class EnemyData implements Enemy {

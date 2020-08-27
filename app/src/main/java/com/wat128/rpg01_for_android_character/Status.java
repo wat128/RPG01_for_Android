@@ -1,8 +1,8 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_character;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import static com.wat128.rpg01_for_android.EnemyList.*;
+import com.wat128.rpg01_for_android.*;
+import static com.wat128.rpg01_for_android_character.EnemyList.*;
 
 public class Status extends AppCompatActivity {
     String name;
@@ -26,21 +26,21 @@ public class Status extends AppCompatActivity {
 class playerStatus extends Status {
 
     public playerStatus() {
-        name = "Hero";
-        imageId = 0; // TODO:
-        lv = 1;
-        exp = 0;
-        strength = 5;
-        agility = 5;
-        resilience = 5;
-        wisdom = 5;
-        luck = 5;
-        maxHp = 15;
-        maxMp = 15;
-        hp = maxHp;
-        mp = maxMp;
-        attack = strength;
-        defence = resilience;
+        super.name = "Hero";
+        super.imageId = 0; // TODO:
+        super.lv = 1;
+        super.exp = 0;
+        super.strength = 5;
+        super.agility = 5;
+        super.resilience = 5;
+        super.wisdom = 5;
+        super.luck = 5;
+        super.maxHp = 15;
+        super.maxMp = 15;
+        super.hp = maxHp;
+        super.mp = maxMp;
+        super.attack = strength;
+        super.defence = resilience;
     }
 }
 

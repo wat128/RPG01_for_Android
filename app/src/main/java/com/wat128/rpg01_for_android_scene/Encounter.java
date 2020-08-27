@@ -1,9 +1,9 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_scene;
 
-class Encounter {
+public class Encounter {
 
-    final static int ENCOUNTER_INTERVAL = 300;
-    static int encounterIntervalAccum;
+    private final static int ENCOUNTER_INTERVAL = 300;
+    public static int encounterIntervalAccum;
 
     static boolean isAccumMoreThanEncounterInterval() {
 

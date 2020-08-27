@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Field"></activity>
-        <activity android:name=".Battle"></activity>
+        <activity android:name="com.wat128.rpg01_for_android_scene.Field"></activity>
+        <activity android:name="com.wat128.rpg01_for_android_scene.Battle"></activity>
 
     </application>
 

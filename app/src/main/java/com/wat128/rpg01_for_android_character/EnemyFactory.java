@@ -1,8 +1,7 @@
-package com.wat128.rpg01_for_android;
+package com.wat128.rpg01_for_android_character;
 
 import android.util.Log;
-
-import static com.wat128.rpg01_for_android.EnemyList.*;
+import static com.wat128.rpg01_for_android_character.EnemyList.*;
 
 public class EnemyFactory {
 
