@@ -30,13 +30,13 @@ public class Battle extends AppCompatActivity {
 
         final Player player = Player.getInstance();
 
-        TextView hpView = findViewById(R.id.hp_val);
+        final TextView hpView = findViewById(R.id.hp_val);
         hpView.setText(String.valueOf(player.getHp()));
 
-        TextView mpView = findViewById(R.id.mp_val);
+        final TextView mpView = findViewById(R.id.mp_val);
         mpView.setText(String.valueOf(player.getMp()));
 
-        TextView lvView = findViewById(R.id.level_val);
+        final TextView lvView = findViewById(R.id.level_val);
         lvView.setText(String.valueOf(player.getLv()));
 
         final int enemyId = intent.getIntExtra("Enemy_Data", 0);
@@ -73,7 +73,6 @@ public class Battle extends AppCompatActivity {
                 // TODO:１対１の戦闘を想定しているため、対複数となった場合はロジックを変更する
                 for(int offense = 0; offense < _battler.size(); ++offense) {
 
-
                     final int defense;
                     if(offense == 0)
                         defense = 1;
@@ -83,11 +82,11 @@ public class Battle extends AppCompatActivity {
                     Battler off = _battler.get(offense);
                     Battler def = _battler.get(defense);
 
-                    int damage = off.getAttack() - def.getDefence();
+                    int damage = off.getAttack() - def.getDefence();    //TODO: ダメージ計算式の修正
                     if(damage < 0)
                         damage = 0;
 
-                    def.recievedDamage(off.getAttack());
+                    def.recievedDamage(damage);
                     msgBoxView.append(getString(R.string.damageMsg,
                             off.getName(), def.getName(), damage));
 
@@ -106,6 +105,9 @@ public class Battle extends AppCompatActivity {
                         break;
                     }
                 }
+
+                hpView.setText(String.valueOf(player.getHp()));
+                mpView.setText(String.valueOf(player.getMp()));
             }
         });
 

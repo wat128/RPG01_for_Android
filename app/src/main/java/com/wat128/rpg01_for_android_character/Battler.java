@@ -10,6 +10,8 @@ public abstract class Battler {
 
     public void recievedDamage(int damage) {
         _status.hp -= damage;
+        if(_status.hp < 0)
+            _status.hp = 0;
     }
 
     public boolean died() {

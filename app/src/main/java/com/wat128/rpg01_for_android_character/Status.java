@@ -74,7 +74,7 @@ class NineTailStatus extends Status {
         id = NINE_TAILED_FOX;
         lv = 1;
         exp = 0;
-        strength = 2;
+        strength = 10;
         agility = 3;
         resilience = 2;
         wisdom = 7;
