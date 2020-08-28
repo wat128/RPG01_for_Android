@@ -21,7 +21,7 @@
                 android:id="@+id/player"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:text="@string/player"
+                android:text="@string/player_for_short"
                 android:textSize="20sp"
                 android:textColor="#fff"
                 android:gravity="center"

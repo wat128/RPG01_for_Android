@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wat128.rpg01_for_android.MainActivity;
 import com.wat128.rpg01_for_android.R;
 import com.wat128.rpg01_for_android_character.*;
 
@@ -96,11 +97,22 @@ public class Battle extends AppCompatActivity {
                             off.getName(), def.getName(), damage));
 
                     if(def.died()){
-//                        if(off.growUp(10) > 0) { }
-
-                        msgBoxView.append(getString(R.string.battleFinished, off.getName()));
 
                         buttonEnabled();
+                        Intent intent = new Intent();
+                        if(def.getId() == BattlerList.PLAYER) {
+
+                            intent.putExtra(Field.WINNER, getString(R.string.enemy));
+                            setResult(RESULT_OK, intent);
+
+                            msgBoxView.append(getString(R.string.lose, player.getName()));
+                        }
+                        else {
+                            msgBoxView.append(getString(R.string.win, player.getName()));
+
+                            // TODO:レベルアップ処理の実装
+                        }
+
                         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                             @Override
                             public void run() {

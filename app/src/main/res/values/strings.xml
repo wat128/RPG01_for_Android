@@ -3,12 +3,15 @@
 
     <string name="gameStart">はじめる</string>
 
+    <string name="player">プレイヤー</string>
+    <string name="enemy">エネミー</string>
+
     <string name="up">↑</string>
     <string name="down">↓</string>
     <string name="left">←</string>
     <string name="right">→</string>
 
-    <string name="player">主</string>
+    <string name="player_for_short">主</string>
     <string name="attack">こうげき</string>
     <string name="magic">じゅもん</string>
     <string name="escape">にげる</string>
@@ -21,7 +24,10 @@
     <string name="level_val">100</string>
 
     <string name="appear">%1$sがあらわれた！</string>
-    <string name="battleFinished">%1$sの勝利です</string>
+    <string name="win">%1$sは敵を倒した！</string>
+    <string name="lose">%1$sはたおれた•••</string>
     <string name="damageMsg">%1$sの攻撃！\n%2$sに%3$dのダメージ！\n</string>
+
+    <string name="king100">負けてしまうとはなんと不甲斐ない•••。\n恥を知るのじゃ！</string>
 
 </resources>

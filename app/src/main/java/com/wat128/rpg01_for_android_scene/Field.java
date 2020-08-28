@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +22,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.wat128.rpg01_for_android.Util.Direction.*;
-import static com.wat128.rpg01_for_android_character.EnemyList.*;
+import static com.wat128.rpg01_for_android_character.BattlerList.*;
 
 class EncountObserveHandler {
     Handler handler;
@@ -29,11 +31,14 @@ class EncountObserveHandler {
 
 public class Field extends AppCompatActivity {
 
-    private final int BATTLE_RESULT = 1000;
+    private static final int RESULT_BATTLE = 1000;
+    public static final String WINNER = "test";
 
     private EncountObserveHandler _encounterObserver;
 
     private List<Integer> _enemyIds = new ArrayList<>(Arrays.asList(SLIME, NINE_TAILED_FOX)); // TODO:テスト用
+
+    private TextView msgBoxView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +60,8 @@ public class Field extends AppCompatActivity {
         Button buttonRight = findViewById(R.id.right);
         buttonRight.setOnTouchListener(_ButtonListener);
 
+        msgBoxView = findViewById(R.id.msg_box);
+
         _encounterObserver = new EncountObserveHandler();
         _encounterObserver.handler = new Handler();
         _encounterObserver.runnable = new Runnable() {
@@ -70,7 +77,7 @@ public class Field extends AppCompatActivity {
                             "Enemy_Data",
                             _enemyIds.get(enemyId));
 
-                    startActivityForResult(intent, BATTLE_RESULT);
+                    startActivityForResult(intent, RESULT_BATTLE);
                 }
                 _encounterObserver.handler.postDelayed(this, 100L);
             }
@@ -113,6 +120,14 @@ public class Field extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("debug", "onActivityResult()");
+
+        if(resultCode == RESULT_OK && requestCode == RESULT_BATTLE && null != data) {
+            String result = data.getStringExtra(Field.WINNER);
+            if(result.equals(getString(R.string.enemy))){
+                Player.getInstance().fullRecovery();
+                msgBoxView.setText(getString(R.string.king100));
+            }
+        }
     }
 
 }

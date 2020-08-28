@@ -8,6 +8,10 @@ public abstract class Battler {
         _status = status;
     }
 
+    public void fullRecovery() {
+        _status.hp = _status.maxHp;
+    }
+
     public void recievedDamage(int damage) {
         _status.hp -= damage;
         if(_status.hp < 0)
@@ -28,6 +32,7 @@ public abstract class Battler {
     }
 
     public void performAction() { }
+
 
     public String getName()     { return _status.name; }
     public int getImageId()     { return _status.imageId; }

@@ -13,7 +13,7 @@
         android:id="@+id/player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/player"
+        android:text="@string/player_for_short"
         android:textSize="24sp"
         android:textColor="#fff"
         android:background="#000"

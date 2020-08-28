@@ -2,7 +2,7 @@ package com.wat128.rpg01_for_android_character;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.wat128.rpg01_for_android.*;
-import static com.wat128.rpg01_for_android_character.EnemyList.*;
+import static com.wat128.rpg01_for_android_character.BattlerList.*;
 
 public class Status extends AppCompatActivity {
     String name;
@@ -28,6 +28,7 @@ class playerStatus extends Status {
     public playerStatus() {
         super.name = "Hero";
         super.imageId = 0; // TODO:
+        super.id = PLAYER;
         super.lv = 1;
         super.exp = 0;
         super.strength = 5;
