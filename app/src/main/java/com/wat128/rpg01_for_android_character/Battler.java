@@ -10,6 +10,7 @@ public abstract class Battler {
 
     public void fullRecovery() {
         _status.hp = _status.maxHp;
+        _status.mp = _status.maxMp;
     }
 
     public void recievedDamage(int damage) {
