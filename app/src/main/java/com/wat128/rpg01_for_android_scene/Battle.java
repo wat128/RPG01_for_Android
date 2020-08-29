@@ -108,9 +108,15 @@ public class Battle extends AppCompatActivity {
                             msgBoxView.append(getString(R.string.lose, player.getName()));
                         }
                         else {
-                            msgBoxView.append(getString(R.string.win, player.getName()));
+                            msgBoxView.append(getString(R.string.win,
+                                    player.getName(), enemy.getName()));
+                            msgBoxView.append(getString(R.string.recieveExp, enemy.getExpGained()));
 
-                            // TODO:レベルアップ処理の実装
+                            final int lvIncrease = player.growUp(enemy.getExpGained());
+                            if(lvIncrease > 0) {
+                                msgBoxView.append(getString(R.string.lvup,
+                                        player.getName(), lvIncrease));
+                            }
                         }
 
                         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {

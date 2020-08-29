@@ -25,29 +25,28 @@ public abstract class Battler {
         return false;
     }
 
-    public int growUp(int exp) {    // TODO:
-        _status.exp += exp;
-
-        return 0;
+    public int growUp(final int exp) {    // TODO:
+        return _status.growUp(exp);
     }
 
     public void performAction() { }
 
 
-    public String getName()     { return _status.name; }
-    public int getImageId()     { return _status.imageId; }
-    public int getId()          { return _status.id; }
-    public int getLv()          { return _status.lv; }
-    public int getExp()         { return _status.exp; }
-    public int getStrength()    { return _status.strength; }
-    public int getAgility()     { return _status.agility; }
-    public int getResilience()  { return _status.resilience; }
-    public int getWisdom()      { return _status.wisdom; }
-    public int getLuck()        { return _status.luck; }
-    public int getMaxHp()       { return _status.maxHp; }
-    public int getMaxMp()       { return _status.maxMp; }
-    public int getHp()          { return _status.hp; }
-    public int getMp()          { return _status.mp; }
-    public int getAttack()      { return _status.attack; }
-    public int getDefence()     { return _status.defence; }
+    public String getName()         { return _status.name; }
+    public int getImageId()         { return _status.imageId; }
+    public int getId()              { return _status.id; }
+    public int getLv()              { return _status.lv.val; }
+    public int getStatusIncrease()  { return _status.lv.statusIncrease; }
+    public int getExpGained()       { return _status.exp.gain; }
+    public int getStrength()        { return _status.strength; }
+    public int getAgility()         { return _status.agility; }
+    public int getResilience()      { return _status.resilience; }
+    public int getWisdom()          { return _status.wisdom; }
+    public int getLuck()            { return _status.luck; }
+    public int getMaxHp()           { return _status.maxHp; }
+    public int getMaxMp()           { return _status.maxMp; }
+    public int getHp()              { return _status.hp; }
+    public int getMp()              { return _status.mp; }
+    public int getAttack()          { return _status.attack; }
+    public int getDefence()         { return _status.defence; }
 }

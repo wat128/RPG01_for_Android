@@ -32,7 +32,7 @@ class EncountObserveHandler {
 public class Field extends AppCompatActivity {
 
     private static final int RESULT_BATTLE = 1000;
-    public static final String WINNER = "test";
+    public static final String WINNER = "Player or Enemy";
 
     private EncountObserveHandler _encounterObserver;
 
@@ -122,12 +122,11 @@ public class Field extends AppCompatActivity {
         Log.d("debug", "onActivityResult()");
 
         if(resultCode == RESULT_OK && requestCode == RESULT_BATTLE && null != data) {
-            String result = data.getStringExtra(Field.WINNER);
-            if(result.equals(getString(R.string.enemy))){
+            String winner = data.getStringExtra(Field.WINNER);
+            if(winner.equals(getString(R.string.enemy))){
                 Player.getInstance().fullRecovery();
                 msgBoxView.setText(getString(R.string.king100));
             }
         }
     }
-
 }

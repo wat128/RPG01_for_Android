@@ -23,11 +23,13 @@
     <string name="mp_val">999</string>
     <string name="level_val">100</string>
 
-    <string name="appear">%1$sがあらわれた！</string>
-    <string name="win">%1$sは敵を倒した！</string>
-    <string name="lose">%1$sはたおれた•••</string>
+    <string name="appear">%1$sがあらわれた！\n</string>
+    <string name="win">%1$sは%2$sを倒した！\n</string>
+    <string name="lose">%1$sはたおれた•••\n</string>
     <string name="damageMsg">%1$sの攻撃！\n%2$sに%3$dのダメージ！\n</string>
+    <string name="recieveExp">%1$dポイントの経験値を獲得！\n</string>
+    <string name="lvup">%1$sはレベルが%2$d上がった！\n</string>
 
-    <string name="king100">負けてしまうとはなんと不甲斐ない•••。\n恥を知るのじゃ！</string>
+    <string name="king100">負けてしまうとはなんと不甲斐ない•••。\n恥を知るのじゃ！\n</string>
 
 </resources>
