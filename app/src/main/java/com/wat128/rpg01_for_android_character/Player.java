@@ -17,16 +17,21 @@ public class Player extends Battler {
 
     private static class PlayerHolder {
         private static final Player INSTANCE = new Player();
+
+    }
+
+    private class Move {
+        Handler handler;
+        Runnable runnable;
     }
 
     private final float SPEED = 10.0f;
-
     private View _chara;
-    private MoveHandler _moveHandler;
+    private Move _move;
 
     private Player() {
         super(new playerStatus());
-        _moveHandler = new MoveHandler();
+        _move = new Move();
     }
 
     public static Player getInstance() {
@@ -37,27 +42,30 @@ public class Player extends Battler {
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {
 
+        if(_move.handler != null)
+            stopMoving();
+
         if(keyPressed) {
-            _moveHandler.handler = new Handler();
-            _moveHandler.runnable = new Runnable() {
+            _move.handler = new Handler();
+            _move.runnable = new Runnable() {
                 @Override
                 public void run() {
                     Log.d("debug", String.valueOf(Encounter.encounterIntervalAccum));
                     setPos(direction, boundary);
                     Encounter.encounterIntervalAccum++;
-                    _moveHandler.handler.postDelayed(this, 10L);
+                    _move.handler.postDelayed(this, 10L);
                 }
             };
-            _moveHandler.handler.post(_moveHandler.runnable);
-        }
-        else{
-            _moveHandler.handler.removeCallbacks(_moveHandler.runnable);
+            _move.handler.post(_move.runnable);
         }
     }
 
     public void stopMoving() {
-        if(_moveHandler.handler != null)
-            _moveHandler.handler.removeCallbacks(_moveHandler.runnable);
+        if(_move.handler != null) {
+            _move.handler.removeCallbacks(_move.runnable);
+            _move.handler = null;
+            _move.runnable = null;
+        }
     }
 
     private void setPos(final Direction direction, final int boundary) {
