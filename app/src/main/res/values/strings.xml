@@ -10,6 +10,7 @@
     <string name="down">↓</string>
     <string name="left">←</string>
     <string name="right">→</string>
+    <string name="enter">○</string>
 
     <string name="player_for_short">主</string>
     <string name="attack">こうげき</string>
