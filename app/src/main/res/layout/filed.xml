@@ -9,9 +9,10 @@
     android:weightSum="1">
 
     <LinearLayout
+        android:id="@+id/gameScreen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8">
+        android:layout_weight="0.75">
 
         <TextView
             android:id="@+id/player"
@@ -26,7 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.25"
         android:background="#000"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -38,60 +39,64 @@
             android:layout_weight="0.4"
             android:weightSum="0.9">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="0.9"
+                android:gravity="center">
                 <Button
                     android:id="@+id/left"
                     android:text="@string/left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"/>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="0.9"
+                android:gravity="center">
                 <Button
                     android:id="@+id/up"
                     android:text="@string/up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerInParent="true"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"/>
 
                 <Button
                     android:id="@+id/enter"
                     android:text="@string/enter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"/>
 
                 <Button
                     android:id="@+id/down"
                     android:text="@string/down"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"/>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="0.9"
+                android:gravity="center">
                 <Button
                     android:id="@+id/right"
                     android:text="@string/right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"/>
+            </LinearLayout>
         </LinearLayout>
 
         <RelativeLayout
