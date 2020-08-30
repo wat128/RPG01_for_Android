@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        View view = findViewById(R.id.activity_main);
+        View view = findViewById(R.id.gameScreenArea);
         ScreenArea.cx = -(view.getWidth() / 2);
         ScreenArea.ex = view.getWidth() / 2;
         ScreenArea.cy = -(view.getHeight() / 2);
-        ScreenArea.ey = view.getWidth() / 2;
+        ScreenArea.ey = view.getHeight() / 2;
     }
 
 }
