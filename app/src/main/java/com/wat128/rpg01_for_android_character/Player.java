@@ -120,4 +120,17 @@ public class Player extends Battler {
                 break;
         }
     }
+
+    @Override
+    public int growUp(final int exp) {
+        final int growUpNum = _status.growUp(exp);;
+
+        if(_status.lv.val == 2) {
+            _skills.add(new Fire());
+            _skills.add(new PowerUp());
+            _skills.add(new Heal());
+        }
+
+        return growUpNum;
+    }
 }

@@ -139,7 +139,15 @@ public class Battle extends AppCompatActivity {
         _btnMagic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Player player = Player.getInstance();
 
+                ArrayList<String> skillsName = new ArrayList<>();
+                skillsName = player.getSkillsName();
+
+                // レベル２になったらスキルが取得できるかを確認
+                Log.d("debug", "スキル１：" + skillsName.get(0));
+                Log.d("debug", "スキル2：" + skillsName.get(1));
+                Log.d("debug", "スキル3：" + skillsName.get(2));
             }
         });
 
