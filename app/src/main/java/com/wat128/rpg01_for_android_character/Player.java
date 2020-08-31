@@ -7,17 +7,10 @@ import android.view.View;
 import com.wat128.rpg01_for_android.Util.*;
 import com.wat128.rpg01_for_android_scene.Encounter;
 
-
-class MoveHandler {
-    Handler handler;
-    Runnable runnable;
-}
-
 public class Player extends Battler {
 
     private static class PlayerHolder {
         private static final Player INSTANCE = new Player();
-
     }
 
     private class Move {
@@ -127,8 +120,6 @@ public class Player extends Battler {
 
         if(_status.lv.val == 2) {
             _skills.add(new Fire());
-            _skills.add(new PowerUp());
-            _skills.add(new Heal());
         }
 
         return growUpNum;

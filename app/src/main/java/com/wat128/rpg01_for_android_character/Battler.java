@@ -44,6 +44,10 @@ public abstract class Battler {
         return skillsName;
     }
 
+    public int getSkillPower(final int index) {
+        return _skills.get(index).getPower();
+    }
+
     public void performAction() { }
 
 
@@ -84,11 +88,13 @@ abstract class Skill {
         _power = power;
         _type = type;
     }
-    public int excute() {
+    public int getPower() {
         return _power;
-    };
+    }
 
-    public String getName() { return _name; }
+    public String getName() {
+        return _name;
+    }
 }
 
 class Fire extends Skill {

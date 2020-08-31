@@ -168,6 +168,17 @@
                     android:textColor="#fff"
                     android:layout_margin="20dp"/>
 
+                <TableLayout
+                    android:id="@+id/skill_button_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_margin="20dp"
+                    android:background="#444"
+                    android:visibility="invisible">
+
+                </TableLayout>
+
             </FrameLayout>
         </LinearLayout>
 
