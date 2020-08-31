@@ -103,12 +103,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ddd"
+                android:layout_margin="5dp"/>
             <TextView
                 android:id="@+id/msg_box"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#ddd"
-                android:layout_margin="5dp"/>
+                android:layout_margin="10dp"/>
         </RelativeLayout>
     </LinearLayout>
 
