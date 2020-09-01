@@ -2,8 +2,8 @@ package com.wat128.rpg01_for_android_character;
 
 import android.util.Log;
 
-public class SkillFactory {
-    public static Skill create(final SkillId skillId) {
+class SkillFactory {
+    static Skill create(final SkillId skillId) {
 
         final Skill skill;
 
