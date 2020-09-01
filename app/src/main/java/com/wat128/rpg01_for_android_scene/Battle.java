@@ -90,6 +90,7 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
 
                 buttonEnabled();
+                _skillTable.setVisibility(View.INVISIBLE);
                 _msgBoxView.setText(getString(R.string.succes_escape, player.getName()));
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override

@@ -19,7 +19,7 @@ class SkillFactory {
                 break;
             default:
                 Log.d("debug", "SkillFactory Failed");
-                skill = new Fire();
+                skill = null;
                 break;
         }
 
