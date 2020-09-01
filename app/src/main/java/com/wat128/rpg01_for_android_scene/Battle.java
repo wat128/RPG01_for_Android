@@ -19,6 +19,7 @@ import com.wat128.rpg01_for_android.R;
 import com.wat128.rpg01_for_android_character.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Battle extends AppCompatActivity {
 
@@ -88,6 +89,14 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                buttonEnabled();
+                _msgBoxView.setText(getString(R.string.succes_escape, player.getName()));
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 2000);
             }
         });
 
