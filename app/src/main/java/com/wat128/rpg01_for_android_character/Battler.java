@@ -1,15 +1,25 @@
 package com.wat128.rpg01_for_android_character;
 
+import com.wat128.rpg01_for_android_scene.Battle;
+
 import java.util.ArrayList;
 
 public abstract class Battler {
 
     Status _status;
     ArrayList<Skill> _skills;
+    AcquireSkillList _acquireSkills;
 
     public Battler(Status status) {
         _status = status;
         _skills = new ArrayList<>();
+        _acquireSkills = null;
+    }
+
+    public Battler(Status status, AcquireSkillList acquireSkills) {
+        _status = status;
+        _skills = new ArrayList<>();
+        _acquireSkills = acquireSkills;
     }
 
     public void fullRecovery() {
@@ -70,47 +80,3 @@ public abstract class Battler {
     public int getDefence()         { return _status.defence; }
 }
 
-enum Type {
-    attack,
-    support,
-    recovery
-}
-
-abstract class Skill {
-    String _name;
-    int _id;
-    int _power;
-    Type _type;
-
-    public Skill(String name, int id, int power, Type type) {
-        _name = name;
-        _id = id;
-        _power = power;
-        _type = type;
-    }
-    public int getPower() {
-        return _power;
-    }
-
-    public String getName() {
-        return _name;
-    }
-}
-
-class Fire extends Skill {
-    public Fire() {
-        super("火炎", 1, 10, Type.attack);
-    }
-}
-
-class PowerUp extends Skill {
-    public PowerUp() {
-        super("パワーアップ", 30, 10, Type.support);
-    }
-}
-
-class Heal extends Skill {
-    public Heal() {
-        super("ヒール", 50, 30, Type.recovery);
-    }
-}

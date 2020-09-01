@@ -23,7 +23,7 @@ public class Player extends Battler {
     private Move _move;
 
     private Player() {
-        super(new playerStatus());
+        super(new playerStatus(), new PlayerSkillList());
         _move = new Move();
     }
 
@@ -116,10 +116,22 @@ public class Player extends Battler {
 
     @Override
     public int growUp(final int exp) {
-        final int growUpNum = _status.growUp(exp);;
 
-        if(_status.lv.val == 2) {
-            _skills.add(new Fire());
+        final int growUpNum = _status.growUp(exp);;
+        if(growUpNum <= 0)
+            return growUpNum;
+
+
+        for(int i = 0; i < _acquireSkills.size; i++) {
+            AcquireSkill data = _acquireSkills.list.get(i);
+
+            if(data.acquired)
+                continue;
+
+            if(_status.lv.val >= data.lv) {
+                _skills.add(SkillFactory.create(data.skillId));
+                data.acquired = true;
+            }
         }
 
         return growUpNum;
