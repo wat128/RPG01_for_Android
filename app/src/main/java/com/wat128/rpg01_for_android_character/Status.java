@@ -120,7 +120,7 @@ class SlimeStatus extends Status {
         super.lv.statusIncrease = 0;
         super.exp.cur = 0;
         super.exp.table = null;
-        super.exp.gain = 2;
+        super.exp.gain = 7;
         super.strength = 2;
         super.agility = 3;
         super.resilience = 2;
@@ -145,7 +145,7 @@ class NineTailStatus extends Status {
         super.lv.statusIncrease = 0;
         super.exp.cur = 0;
         super.exp.table = null;
-        super.exp.gain = 5;
+        super.exp.gain = 10;
         super.strength = 10;
         super.agility = 3;
         super.resilience = 2;
