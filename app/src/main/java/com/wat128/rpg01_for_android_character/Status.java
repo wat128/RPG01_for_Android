@@ -21,7 +21,7 @@ class Exp {
 public class Status extends AppCompatActivity {
     String name;
     int imageId;
-    int id;
+    BattlerList id;
     Lv lv;
     Exp exp;
     int strength;
@@ -90,7 +90,7 @@ class playerStatus extends Status {
     public playerStatus() {
         super.name = "Hero";
         super.imageId = 0; // TODO:
-        super.id = PLAYER;
+        super.id = BattlerList.PLAYER;
         super.lv.val = 1;
         super.lv.statusIncrease = 3;
         super.exp.cur = 0;
@@ -115,7 +115,7 @@ class SlimeStatus extends Status {
     public SlimeStatus() {
         super.name = "スライム";
         super.imageId = R.drawable.slime;
-        super.id = SLIME;
+        super.id = BattlerList.SLIME;
         super.lv.val = 1;
         super.lv.statusIncrease = 0;
         super.exp.cur = 0;
@@ -140,7 +140,7 @@ class NineTailStatus extends Status {
     public NineTailStatus() {
         super.name = "キュウビ";
         super.imageId = R.drawable.nine_taled_fox;
-        super.id = NINE_TAILED_FOX;
+        super.id = BattlerList.NINE_TAILED_FOX;
         super.lv.val = 1;
         super.lv.statusIncrease = 0;
         super.exp.cur = 0;

@@ -5,7 +5,7 @@ import static com.wat128.rpg01_for_android_character.BattlerList.*;
 
 public class EnemyFactory {
 
-    public static Enemy create(final int enemyId) {
+    public static Enemy create(final BattlerList enemyId) {
 
         final Enemy enemy;
 

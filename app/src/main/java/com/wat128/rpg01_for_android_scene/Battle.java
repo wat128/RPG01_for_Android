@@ -57,7 +57,7 @@ public class Battle extends AppCompatActivity {
         _lvView = findViewById(R.id.level_val);
         _lvView.setText(String.valueOf(player.getLv()));
 
-        final int enemyId = intent.getIntExtra("Enemy_Data", 0);
+        final BattlerList enemyId = (BattlerList)intent.getSerializableExtra("Enemy_Data");
         _enemy = EnemyFactory.create(enemyId);
         Log.d("debug", "Enemy ID : " + String.valueOf(enemyId));
 

@@ -63,7 +63,7 @@ public abstract class Battler {
 
     public String getName()         { return _status.name; }
     public int getImageId()         { return _status.imageId; }
-    public int getId()              { return _status.id; }
+    public BattlerList getId()      { return _status.id; }
     public int getLv()              { return _status.lv.val; }
     public int getStatusIncrease()  { return _status.lv.statusIncrease; }
     public int getExpGained()       { return _status.exp.gain; }

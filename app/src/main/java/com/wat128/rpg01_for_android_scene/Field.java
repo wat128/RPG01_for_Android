@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.wat128.rpg01_for_android.R;
 import com.wat128.rpg01_for_android.Util.*;
+import com.wat128.rpg01_for_android_character.BattlerList;
 import com.wat128.rpg01_for_android_character.Player;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class Field extends AppCompatActivity {
 
     private EncountObserveHandler _encounterObserver;
 
-    private List<Integer> _enemyIds = new ArrayList<>(Arrays.asList(SLIME, NINE_TAILED_FOX)); // TODO:テスト用
+    private List<BattlerList> _enemyIds = new ArrayList<>(Arrays.asList(
+            SLIME, NINE_TAILED_FOX)); // TODO:テスト用
 
     private TextView msgBoxView;
 
@@ -72,10 +74,8 @@ public class Field extends AppCompatActivity {
                     Intent intent = new Intent(Field.this, Battle.class);
 
                     Random random = new Random();
-                    int enemyId = random.nextInt(_enemyIds.size());
-                    intent.putExtra(
-                            "Enemy_Data",
-                            _enemyIds.get(enemyId));
+                    BattlerList enemyId = _enemyIds.get(random.nextInt(_enemyIds.size()));
+                    intent.putExtra("Enemy_Data", enemyId);
 
                     startActivityForResult(intent, RESULT_BATTLE);
                 }
