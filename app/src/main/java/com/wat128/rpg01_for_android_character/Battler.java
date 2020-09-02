@@ -54,8 +54,22 @@ public abstract class Battler {
         return skillsName;
     }
 
-    public int getSkillPower(final int index) {
-        return _skills.get(index).getPower();
+    public boolean isSkillAvailable(final int index) {
+        if(_status.mp >= _skills.get(index).getMp())
+            return true;
+
+        return false;
+    }
+
+    public int activateSkill(final int index) {
+
+        if(isSkillAvailable(index)){
+            Skill skill = _skills.get(index);
+            _status.mp -= skill.getMp();
+            return skill.getPower();
+        }
+
+        return 0;
     }
 
     public void performAction() { }

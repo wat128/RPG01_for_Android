@@ -134,7 +134,7 @@ public class Battle extends AppCompatActivity {
         }
     }
 
-    private Button createSkillButton(String skillName, final int index) {
+    private Button createSkillButton(final String skillName, final int index) {
 
         final Player player = Player.getInstance();
 
@@ -150,7 +150,12 @@ public class Battle extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BattleStart(player.getSkillPower(index));
+                if(player.isSkillAvailable(index))
+                    BattleStart(player.activateSkill(index));
+                else {
+                    _skillTable.setVisibility(View.INVISIBLE);
+                    _msgBoxView.setText(getString(R.string.skill_unusable));
+                }
             }
         });
         return button;

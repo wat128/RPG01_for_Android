@@ -30,6 +30,7 @@
     <string name="succes_escape">%1$sは逃げたした！</string>
     <string name="failed_escape">まわりこまれてしまった！</string>
     <string name="damageMsg">%1$sの攻撃！\n%2$sに%3$dのダメージ！\n</string>
+    <string name="skill_unusable">MPが足りない！</string>
     <string name="recieveExp">%1$dポイントの経験値を獲得！\n</string>
     <string name="lvup">%1$sはレベルが%2$d上がった！\n</string>
 

@@ -16,21 +16,23 @@ abstract class Skill {
     String _name;
     SkillId _id;
     int _power;
+    int _mp;
     Type _type;
 
-    public Skill(String name, SkillId id, int power, Type type) {
+    public Skill(String name, SkillId id, int power, int mp, Type type) {
         _name = name;
         _id = id;
         _power = power;
+        _mp = mp;
         _type = type;
+    }
+    public String getName() {
+        return _name;
     }
     public int getPower() {
         return _power;
     }
-
-    public String getName() {
-        return _name;
-    }
+    public int getMp() { return _mp;}
 }
 
 /*　2020/09/01
@@ -42,19 +44,19 @@ abstract class Skill {
  */
 class Fire extends Skill {
     public Fire() {
-        super("火炎", SkillId.Fire, 10, Type.attack);
+        super("火炎", SkillId.Fire, 10, 3, Type.attack);
     }
 }
 
 class PowerUp extends Skill {
     public PowerUp() {
-        super("パワーアップ", SkillId.PowerUp, 10, Type.support);
+        super("パワーアップ", SkillId.PowerUp, 10, 4, Type.support);
     }
 }
 
 class Heal extends Skill {
     public Heal() {
-        super("ヒール", SkillId.Heal, 30, Type.recovery);
+        super("ヒール", SkillId.Heal, 30, 5, Type.recovery);
     }
 }
 
