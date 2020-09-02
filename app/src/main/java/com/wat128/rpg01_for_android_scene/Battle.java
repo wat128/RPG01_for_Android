@@ -25,6 +25,7 @@ public class Battle extends AppCompatActivity {
 
     private ArrayList<Battler> _battler;
     private Enemy _enemy;
+    private ImageView _enemyImage;
 
     private Button _btnAttack;
     private Button _btnMagic;
@@ -61,8 +62,8 @@ public class Battle extends AppCompatActivity {
         _enemy = EnemyFactory.create(enemyId);
         Log.d("debug", "Enemy ID : " + String.valueOf(enemyId));
 
-        ImageView enemyImage = findViewById(R.id.enemyImage);
-        enemyImage.setImageResource(_enemy.getImageId());
+        _enemyImage = findViewById(R.id.enemyImage);
+        _enemyImage.setImageResource(_enemy.getImageId());
 
         _msgBoxView = findViewById(R.id.msg_box);
         _msgBoxView.setText(getString(R.string.appear, _enemy.getName()));
@@ -220,6 +221,9 @@ public class Battle extends AppCompatActivity {
                     _msgBoxView.append(getString(R.string.lose, player.getName()));
                 }
                 else {
+
+                    _enemyImage.setVisibility(View.INVISIBLE);
+
                     _msgBoxView.append(getString(R.string.win,
                             player.getName(), _enemy.getName()));
                     _msgBoxView.append(getString(R.string.recieveExp, _enemy.getExpGained()));
