@@ -250,4 +250,9 @@ public class Battle extends AppCompatActivity {
         _mpView.setText(String.valueOf(player.getMp()));
         _skillTable.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

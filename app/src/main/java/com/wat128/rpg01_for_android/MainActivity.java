@@ -42,4 +42,8 @@ public class MainActivity extends AppCompatActivity {
         ScreenArea.ey = view.getHeight() / 2;
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

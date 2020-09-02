@@ -129,4 +129,9 @@ public class Field extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
