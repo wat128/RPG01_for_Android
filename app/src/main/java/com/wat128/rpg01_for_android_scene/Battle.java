@@ -208,11 +208,11 @@ public class Battle extends AppCompatActivity {
                     attackSkill(offence.battler, defense.battler, offence.skillIndex);
                     break;
 //                case S_Support:
-//                    uportSkill();
+//                    supportSkill();
 //                    break;
-//                case S_Recovery:
-//                    ecoverySkill();
-//                    break;
+                case S_Recovery:
+                    recoverySkill(offence.battler, offence.skillIndex);
+                    break;
                 default:
                     normalAttack(_battlers.get(0).battler, _battlers.get(1).battler);
                     break;
@@ -266,6 +266,17 @@ public class Battle extends AppCompatActivity {
         def.recievedDamage(damage);
         _msgBoxView.append(getString(R.string.skillAttackMsg,
                 off.getName(), off.getSkill(index).getName(), def.getName(), damage));
+    }
+
+    private void recoverySkill(final Battler battler, final int index) {
+
+        int healing = battler.activateSkill(index);
+        if (healing < 0)
+            healing = 0;
+
+        final int actualHealing = battler.recovery(healing);
+        _msgBoxView.append(getString(R.string.skillRecoveryMsg,
+                battler.getName(), battler.getSkill(index).getName(), actualHealing));
     }
 
     private boolean died(final Battler battler) {

@@ -27,10 +27,23 @@ public abstract class Battler {
         _status.mp = _status.maxMp;
     }
 
-    public void recievedDamage(int damage) {
+    public void recievedDamage(final int damage) {
         _status.hp -= damage;
         if(_status.hp < 0)
             _status.hp = 0;
+    }
+
+    public int recovery(final int healing) {
+        int actual = healing;
+
+        final int diff = _status.maxHp - _status.hp;
+        _status.hp += healing;
+        if(_status.hp > _status.maxHp) {
+            _status.hp = _status.maxHp;
+            actual = diff;
+
+        }
+        return actual;
     }
 
     public boolean died() {
