@@ -14,16 +14,16 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.wat128.rpg01_for_android.MainActivity;
 import com.wat128.rpg01_for_android.R;
 import com.wat128.rpg01_for_android_character.*;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
 public class Battle extends AppCompatActivity {
 
-    private ArrayList<Battler> _battler;
+    private ArrayList<ActionOrder> _battlers;
+    private Player _player;
     private Enemy _enemy;
     private ImageView _enemyImage;
 
@@ -47,16 +47,17 @@ public class Battle extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        final Player player = Player.getInstance();
+        _player = Player.getInstance();
+        _battlers = new ArrayList<>();
 
         _hpView = findViewById(R.id.hp_val);
-        _hpView.setText(String.valueOf(player.getHp()));
+        _hpView.setText(String.valueOf(_player.getHp()));
 
         _mpView = findViewById(R.id.mp_val);
-        _mpView.setText(String.valueOf(player.getMp()));
+        _mpView.setText(String.valueOf(_player.getMp()));
 
         _lvView = findViewById(R.id.level_val);
-        _lvView.setText(String.valueOf(player.getLv()));
+        _lvView.setText(String.valueOf(_player.getLv()));
 
         final BattlerList enemyId = (BattlerList)intent.getSerializableExtra("Enemy_Data");
         _enemy = EnemyFactory.create(enemyId);
@@ -72,7 +73,7 @@ public class Battle extends AppCompatActivity {
         _btnAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BattleStart(0);
+                BattleStart(-1);
             }
         });
 
@@ -92,7 +93,7 @@ public class Battle extends AppCompatActivity {
 
                 buttonEnabled();
                 _skillTable.setVisibility(View.INVISIBLE);
-                _msgBoxView.setText(getString(R.string.succes_escape, player.getName()));
+                _msgBoxView.setText(getString(R.string.succes_escape, _player.getName()));
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -113,11 +114,10 @@ public class Battle extends AppCompatActivity {
     }
 
     private void initSkillTable() {
-        Player player = Player.getInstance();
 
         _skillTable = findViewById(R.id.skill_button_table);
         ArrayList<String> skillsName = new ArrayList<>();
-        skillsName = player.getSkillsName();
+        skillsName = _player.getSkillsName();
 
         final int skillNum = skillsName.size();
 
@@ -137,8 +137,6 @@ public class Battle extends AppCompatActivity {
 
     private Button createSkillButton(final String skillName, final int index) {
 
-        final Player player = Player.getInstance();
-
         Button button = new Button(this);
         TableLayout.LayoutParams buttonLayoutParams = new TableLayout.LayoutParams(
                 0,
@@ -151,8 +149,8 @@ public class Battle extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(player.isSkillAvailable(index))
-                    BattleStart(player.activateSkill(index));
+                if(_player.isSkillAvailable(index))
+                    BattleStart(index);
                 else {
                     _skillTable.setVisibility(View.INVISIBLE);
                     _msgBoxView.setText(getString(R.string.skill_unusable));
@@ -169,90 +167,167 @@ public class Battle extends AppCompatActivity {
         _btnItem.setEnabled(false);
     }
 
-    private void BattleStart(final int skillPower) {
+    // スキル未使用(通常攻撃)なら pSkillIndex に -1 を渡す
+    private void BattleStart(final int pSkillIndex) {
 
-        Player player = Player.getInstance();
-
-        // 前ターンのメッセージの初期化
         _msgBoxView.setText("");
+        _battlers.clear();
+        // プレイヤーの行動を決める
+        final Skill pSkill = _player.getSkill(pSkillIndex);
+        final Type pAction = decideToActionType(pSkill);
 
-        if(_battler == null) {
-            _battler = new ArrayList<>();
+        ActionOrder pOrder = new ActionOrder(_player, pAction, pSkillIndex);
 
-            final boolean playerIsFaster = player.getAgility() >= _enemy.getAgility();
-            if (playerIsFaster) {
-                _battler.add(player);
-                _battler.add(_enemy);
-            } else {
-                _battler.add(_enemy);
-                _battler.add(player);
-            }
+        // エネミーの行動を決める
+        final int eSkillIndex = _enemy.decideToAction();
+        final Skill eSkill = _enemy.getSkill(eSkillIndex);
+        final Type eAction = decideToActionType(eSkill);
+
+        ActionOrder eOrder = new ActionOrder(_enemy, eAction, eSkillIndex);
+
+        // 行動順を決定
+        final boolean playerIsFaster = _player.getAgility() >= _enemy.getAgility();
+        if (playerIsFaster) {
+            _battlers.add(pOrder);
+            _battlers.add(eOrder);
+        } else {
+            _battlers.add(eOrder);
+            _battlers.add(pOrder);
         }
 
-        // TODO:１対１の戦闘を想定しているため、対複数となった場合はロジックを変更する
-        for(int offense = 0; offense < _battler.size(); ++offense) {
+        // 行動実行
+        for(int count = 0; count < _battlers.size(); count++) {
+            final ActionOrder offence = _battlers.get(0);
+            final ActionOrder defense = _battlers.get(1);
 
-            final int defense;
-            if(offense == 0)
-                defense = 1;
-            else
-                defense = 0;
+            switch (offence.actionType) {
+                case N_Attack:
+                    normalAttack(offence.battler, defense.battler);
+                    break;
+                case S_Attack:
+                    attackSkill(offence.battler, defense.battler, offence.skillIndex);
+                    break;
+//                case S_Support:
+//                    uportSkill();
+//                    break;
+//                case S_Recovery:
+//                    ecoverySkill();
+//                    break;
+                default:
+                    normalAttack(_battlers.get(0).battler, _battlers.get(1).battler);
+                    break;
+            }
 
-            Battler off = _battler.get(offense);
-            Battler def = _battler.get(defense);
-
-            int damage = off.getAttack() + skillPower - def.getDefence(); //TODO: ダメージ計算式の修正
-            if(damage < 0)
-                damage = 0;
-
-            def.recievedDamage(damage);
-            _msgBoxView.append(getString(R.string.damageMsg,
-                    off.getName(), def.getName(), damage));
-
-            if(def.died()){
-
-                buttonEnabled();
-                Intent intent = new Intent();
-                if(def.getId() == BattlerList.PLAYER) {
-
-                    intent.putExtra(Field.WINNER, getString(R.string.enemy));
-                    setResult(RESULT_OK, intent);
-
-                    _msgBoxView.append(getString(R.string.lose, player.getName()));
-                }
-                else {
-
-                    _enemyImage.setVisibility(View.INVISIBLE);
-
-                    _msgBoxView.append(getString(R.string.win,
-                            player.getName(), _enemy.getName()));
-                    _msgBoxView.append(getString(R.string.recieveExp, _enemy.getExpGained()));
-
-                    final int lvIncrease = player.growUp(_enemy.getExpGained());
-                    if(lvIncrease > 0) {
-                        _msgBoxView.append(getString(R.string.lvup,
-                                player.getName(), lvIncrease));
-                    }
-                }
-
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 2000);
-
+            if(died(defense.battler))
                 break;
+
+            // バトル続行により攻守交代　TODO:１対１を想定により複数となる際は変更
+            Collections.reverse(_battlers);
+        }
+
+        _hpView.setText(String.valueOf(_player.getHp()));
+        _mpView.setText(String.valueOf(_player.getMp()));
+        _skillTable.setVisibility(View.INVISIBLE);
+    }
+
+    private Type decideToActionType(final Skill skill) {
+        final Type actionType;
+        if(skill == null) {
+            actionType = Type.N_Attack;
+        }
+        else {
+            switch (skill.getType()) {
+                case S_Attack:      actionType = Type.S_Attack;    break;
+                case S_Support:     actionType = Type.S_Support;   break;
+                case S_Recovery:    actionType = Type.S_Recovery;  break;
+                default:            actionType = Type.N_Attack;    break;
             }
         }
 
-        _hpView.setText(String.valueOf(player.getHp()));
-        _mpView.setText(String.valueOf(player.getMp()));
-        _skillTable.setVisibility(View.INVISIBLE);
+        return actionType;
+    }
+
+    private void normalAttack(final Battler off, final Battler def) {
+
+        int damage = off.getAttack() - def.getDefence(); //TODO: ダメージ計算式の修正
+        if (damage < 0)
+            damage = 0;
+
+        def.recievedDamage(damage);
+        _msgBoxView.append(getString(R.string.attackMsg, off.getName(), def.getName(), damage));
+    }
+
+    private void attackSkill(final Battler off, final Battler def, final int index) {
+
+        int damage = ( off.getAttack() + off.activateSkill(index) ) - def.getDefence(); //TODO: ダメージ計算式の修正
+        if (damage < 0)
+            damage = 0;
+
+        def.recievedDamage(damage);
+        _msgBoxView.append(getString(R.string.skillAttackMsg,
+                off.getName(), off.getSkill(index).getName(), def.getName(), damage));
+    }
+
+    private boolean died(final Battler battler) {
+
+        if(!battler.died()) {
+            return false;
+        }
+        else {
+
+            buttonEnabled();
+            Intent intent = new Intent();
+
+            // 以下条件式以降、battlerではなく、playerとenemyを直接使用する
+            // true     : battler == player
+            // false    : battler == enemy
+            if(battler.getId() == BattlerList.PLAYER) {
+
+                intent.putExtra(Field.WINNER, getString(R.string.enemy));
+                setResult(RESULT_OK, intent);
+
+                _msgBoxView.append(getString(R.string.lose, _player.getName()));
+            }
+            else {
+
+                _enemyImage.setVisibility(View.INVISIBLE);
+
+                _msgBoxView.append(getString(R.string.win, _player.getName(), _enemy.getName()));
+                _msgBoxView.append(getString(R.string.recieveExp, _enemy.getExpGained()));
+
+                final int lvIncrease = _player.growUp(_enemy.getExpGained());
+                if(lvIncrease > 0) {
+                    _msgBoxView.append(getString(R.string.lvup, _player.getName(), lvIncrease));
+                }
+            }
+
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 2000);
+        }
+
+        return true;
     }
 
     @Override
     public void onBackPressed() {
 
     }
+}
+
+class ActionOrder {
+
+    Battler battler;
+    Type actionType;
+    int skillIndex;
+
+    ActionOrder(final Battler battler, final Type actionType, final int skillIndex) {
+        this.battler = battler;
+        this.actionType = actionType;
+        this.skillIndex = skillIndex;
+    }
+
 }

@@ -1,18 +1,12 @@
 package com.wat128.rpg01_for_android_character;
 
-enum Type {
-    attack,
-    support,
-    recovery
-}
-
 enum SkillId {
     Fire,
     PowerUp,
     Heal
 }
 
-abstract class Skill {
+public abstract class Skill {
     String _name;
     SkillId _id;
     int _power;
@@ -33,6 +27,7 @@ abstract class Skill {
         return _power;
     }
     public int getMp() { return _mp;}
+    public Type getType() { return _type; }
 }
 
 /*　2020/09/01
@@ -44,19 +39,19 @@ abstract class Skill {
  */
 class Fire extends Skill {
     public Fire() {
-        super("火炎", SkillId.Fire, 10, 3, Type.attack);
+        super("火炎", SkillId.Fire, 10, 3, Type.S_Attack);
     }
 }
 
 class PowerUp extends Skill {
     public PowerUp() {
-        super("パワーアップ", SkillId.PowerUp, 10, 4, Type.support);
+        super("パワーアップ", SkillId.PowerUp, 10, 4, Type.S_Support);
     }
 }
 
 class Heal extends Skill {
     public Heal() {
-        super("ヒール", SkillId.Heal, 30, 5, Type.recovery);
+        super("ヒール", SkillId.Heal, 30, 5, Type.S_Recovery);
     }
 }
 

@@ -6,10 +6,5 @@ public class Enemy extends Battler {
     public Enemy(Status status) {
          super(status);
     }
-
-    @Override
-    public void performAction() {
-
-    }
 }
 

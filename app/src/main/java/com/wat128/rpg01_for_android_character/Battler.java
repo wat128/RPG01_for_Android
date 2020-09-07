@@ -54,6 +54,14 @@ public abstract class Battler {
         return skillsName;
     }
 
+    public Skill getSkill(final int index) {
+
+        if(index < 0)
+            return null;
+
+        return _skills.get(index);
+    }
+
     public boolean isSkillAvailable(final int index) {
         if(_status.mp >= _skills.get(index).getMp())
             return true;
@@ -72,7 +80,11 @@ public abstract class Battler {
         return 0;
     }
 
-    public void performAction() { }
+    // バトルでの行動を決定する。通常攻撃なら-1, スキルならインデックスを返す。
+    // スキル発動はインデックスを使用して別メソッドのコールが必要
+    public int decideToAction() {
+        return -1;  // TODO;実装
+    }
 
 
     public String getName()         { return _status.name; }
