@@ -17,13 +17,11 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
                 android:id="@+id/player"
+                android:src="@drawable/hero_down"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:text="@string/player_for_short"
-                android:textSize="20sp"
-                android:textColor="#fff"
                 android:gravity="center"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
