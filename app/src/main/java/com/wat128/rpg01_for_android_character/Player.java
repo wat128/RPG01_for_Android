@@ -2,8 +2,9 @@ package com.wat128.rpg01_for_android_character;
 
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
+import com.wat128.rpg01_for_android.R;
 import com.wat128.rpg01_for_android.Util.*;
 import com.wat128.rpg01_for_android_scene.Encounter;
 
@@ -19,11 +20,14 @@ public class Player extends Battler {
     }
 
     private final float SPEED = 10.0f;
-    private View _chara;
+    private ImageView _chara;
+    private Direction _direction;
     private Move _move;
 
     private Player() {
         super(new playerStatus(), new PlayerSkillList());
+        _chara = null;
+        _direction = Direction.Down;
         _move = new Move();
     }
 
@@ -31,7 +35,13 @@ public class Player extends Battler {
         return PlayerHolder.INSTANCE;
     }
 
-    public void setImageView(final View img) { _chara = img; }
+    public void setImageView(final ImageView img) {
+        _chara = img;
+        Glide.with(_chara.getContext())
+                .load(R.raw.hero_down)
+                .placeholder(R.drawable.hero_down)
+                .into(_chara);
+    }
 
     public void move(final Direction direction, final int boundary, final boolean keyPressed) {
 
@@ -68,6 +78,13 @@ public class Player extends Battler {
 
         switch (direction) {
             case Up:
+                if(_direction != direction) {
+                    _direction = direction;
+                    Glide.with(_chara.getContext())
+                            .load(R.raw.hero_up)
+                            .placeholder(R.drawable.hero_up)
+                            .into(_chara);
+                }
                 curPos = _chara.getTranslationY();
                 offset = curPos - SPEED;
                 final float chara_cy = offset - _chara.getHeight() / 2.0f;
@@ -79,6 +96,14 @@ public class Player extends Battler {
 
                 break;
             case Down:
+                if(_direction != direction) {
+                    _direction = direction;
+                    Glide.with(_chara.getContext())
+                            .load(R.raw.hero_down)
+                            .placeholder(R.drawable.hero_down)
+                            .into(_chara);
+                }
+
                 curPos = _chara.getTranslationY();
                 offset = curPos + SPEED;
                 final float chara_ey = offset + _chara.getHeight() / 2.0f;
@@ -90,6 +115,14 @@ public class Player extends Battler {
 
                 break;
             case Left:
+                if(_direction != direction) {
+                    _direction = direction;
+                    Glide.with(_chara.getContext())
+                            .load(R.raw.hero_left)
+                            .placeholder(R.drawable.hero_left)
+                            .into(_chara);
+                }
+
                 curPos = _chara.getTranslationX();
                 offset = curPos - SPEED;
                 final float chara_cx = offset - _chara.getWidth() / 2.0f;
@@ -101,6 +134,14 @@ public class Player extends Battler {
 
                 break;
             case Right:
+                if(_direction != direction) {
+                    _direction = direction;
+                    Glide.with(_chara.getContext())
+                            .load(R.raw.hero_right)
+                            .placeholder(R.drawable.hero_right)
+                            .into(_chara);
+                }
+
                 curPos = _chara.getTranslationX();
                 offset = curPos + SPEED;
                 final float chara_ex = offset + _chara.getWidth() / 2.0f;

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -48,7 +49,7 @@ public class Field extends AppCompatActivity {
         setContentView(R.layout.filed);
 
         final Player player = Player.getInstance();
-        player.setImageView(findViewById(R.id.player));
+        player.setImageView((ImageView)findViewById(R.id.player));
 
         Button buttonUp = findViewById(R.id.up);
         buttonUp.setOnTouchListener(_ButtonListener);
