@@ -1,7 +1,5 @@
 package com.wat128.rpg01_for_android_character;
 
-import com.wat128.rpg01_for_android_scene.Battle;
-
 import java.util.ArrayList;
 
 public abstract class Battler {
@@ -107,9 +105,9 @@ public abstract class Battler {
     public int getStatusIncrease()  { return _status.lv.statusIncrease; }
     public int getExpGained()       { return _status.exp.gain; }
     public int getStrength()        { return _status.strength; }
+    public int getVitality()        { return _status.vitality; }
     public int getAgility()         { return _status.agility; }
-    public int getResilience()      { return _status.resilience; }
-    public int getWisdom()          { return _status.wisdom; }
+    public int getIntelligense()    { return _status.intelligence; }
     public int getLuck()            { return _status.luck; }
     public int getMaxHp()           { return _status.maxHp; }
     public int getMaxMp()           { return _status.maxMp; }

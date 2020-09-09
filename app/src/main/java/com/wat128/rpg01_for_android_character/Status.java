@@ -1,11 +1,7 @@
 package com.wat128.rpg01_for_android_character;
 
-import androidx.appcompat.app.AppCompatActivity;
 import com.wat128.rpg01_for_android.*;
-
 import java.util.Random;
-
-import static com.wat128.rpg01_for_android_character.BattlerList.*;
 
 class Lv {
     int val;
@@ -18,7 +14,7 @@ class Exp {
     int gain;
 }
 
-public class Status extends AppCompatActivity {
+public class Status {
     String name;
     int imageId;
     BattlerList id;
@@ -26,8 +22,8 @@ public class Status extends AppCompatActivity {
     Exp exp;
     int strength;
     int agility;
-    int resilience;
-    int wisdom;
+    int vitality;
+    int intelligence;
     int luck;
     int maxHp;
     int maxMp;
@@ -74,9 +70,9 @@ public class Status extends AppCompatActivity {
         final int increaseVal = random.nextInt(lv.statusIncrease) + 1;
 
         strength += increaseVal;
+        vitality += increaseVal;
         agility += increaseVal;
-        resilience += increaseVal;
-        wisdom += increaseVal;
+        intelligence += increaseVal;
         luck += increaseVal;
         maxHp += increaseVal;
         maxMp += increaseVal;
@@ -97,16 +93,16 @@ class playerStatus extends Status {
         super.exp.table = ExpTable.player;
         super.exp.gain = 0;
         super.strength = 5;
+        super.vitality = 5;
         super.agility = 5;
-        super.resilience = 5;
-        super.wisdom = 5;
+        super.intelligence = 5;
         super.luck = 5;
         super.maxHp = 15;
         super.maxMp = 15;
         super.hp = maxHp;
         super.mp = maxMp;
         super.attack = strength;
-        super.defence = resilience;
+        super.defence = vitality;
     }
 }
 
@@ -122,16 +118,16 @@ class SlimeStatus extends Status {
         super.exp.table = null;
         super.exp.gain = 7;
         super.strength = 2;
+        super.vitality = 2;
         super.agility = 3;
-        super.resilience = 2;
-        super.wisdom = 7;
+        super.intelligence = 7;
         super.luck = 7;
         super.maxHp = 10;
         super.maxMp = 5;
         super.hp = maxHp;
         super.mp = maxMp;
         super.attack = strength;
-        super.defence = resilience;
+        super.defence = vitality;
     }
 }
 
@@ -147,15 +143,15 @@ class NineTailStatus extends Status {
         super.exp.table = null;
         super.exp.gain = 10;
         super.strength = 10;
+        super.vitality = 2;
         super.agility = 3;
-        super.resilience = 2;
-        super.wisdom = 7;
+        super.intelligence = 7;
         super.luck = 7;
         super.maxHp = 10;
         super.maxMp = 5;
         super.hp = maxHp;
         super.mp = maxMp;
         super.attack = strength;
-        super.defence = resilience;
+        super.defence = vitality;
     }
 }
