@@ -169,7 +169,7 @@ public class Player extends Battler {
             if(data.acquired)
                 continue;
 
-            if(_status.lv.val >= data.lv) {
+            if(_status.lv.val() >= data.lv) {
                 _skills.add(SkillFactory.create(data.skillId));
                 data.acquired = true;
             }

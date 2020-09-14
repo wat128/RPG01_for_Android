@@ -21,31 +21,20 @@ public abstract class Battler {
     }
 
     public void fullRecovery() {
-        _status.hp = _status.maxHp;
-        _status.mp = _status.maxMp;
+        _status.hp.fullRecovery();
+        _status.mp.fullRecovery();
     }
 
-    public void recievedDamage(final int damage) {
-        _status.hp -= damage;
-        if(_status.hp < 0)
-            _status.hp = 0;
+    public void recievedDamage(final float damage) {
+        _status.hp.decrease(damage);
     }
 
-    public int recovery(final int healing) {
-        int actual = healing;
-
-        final int diff = _status.maxHp - _status.hp;
-        _status.hp += healing;
-        if(_status.hp > _status.maxHp) {
-            _status.hp = _status.maxHp;
-            actual = diff;
-
-        }
-        return actual;
+    public int recovery(final float healing) {
+        return _status.hp.recovery(healing);
     }
 
     public boolean died() {
-        if(_status.hp <= 0)
+        if(_status.hp.isEmpty())
             return true;
 
         return false;
@@ -74,7 +63,7 @@ public abstract class Battler {
     }
 
     public boolean isSkillAvailable(final int index) {
-        if(_status.mp >= _skills.get(index).getMp())
+        if(_status.mp.cur() >= _skills.get(index).getMp())
             return true;
 
         return false;
@@ -84,7 +73,7 @@ public abstract class Battler {
 
         if(isSkillAvailable(index)){
             Skill skill = _skills.get(index);
-            _status.mp -= skill.getMp();
+            _status.mp.decrease(skill.getMp());
             return skill.getPower();
         }
 
@@ -101,19 +90,14 @@ public abstract class Battler {
     public String getName()         { return _status.name; }
     public int getImageId()         { return _status.imageId; }
     public BattlerList getId()      { return _status.id; }
-    public int getLv()              { return _status.lv.val; }
-    public int getStatusIncrease()  { return _status.lv.statusIncrease; }
-    public int getExpGained()       { return _status.exp.gain; }
-    public int getStrength()        { return _status.strength; }
-    public int getVitality()        { return _status.vitality; }
-    public int getAgility()         { return _status.agility; }
-    public int getIntelligense()    { return _status.intelligence; }
-    public int getLuck()            { return _status.luck; }
-    public int getMaxHp()           { return _status.maxHp; }
-    public int getMaxMp()           { return _status.maxMp; }
-    public int getHp()              { return _status.hp; }
-    public int getMp()              { return _status.mp; }
-    public int getAttack()          { return _status.attack; }
-    public int getDefence()         { return _status.defence; }
+    public int getLv()              { return _status.lv.val(); }
+    public int getExpGained()       { return _status.exp.getGain(); }
+    public int getHp()              { return _status.hp.cur(); }
+    public int getMp()              { return _status.mp.cur(); }
+    public int getAttack()          { return _status.atk.cur(); }
+    public int getDefence()         { return _status.def.cur(); }
+    public int getAgility()         { return _status.agi.cur(); }
+    public int getfloatelligense()  { return _status.mind.cur(); }
+    public int getLuck()            { return _status.luk.cur(); }
 }
 

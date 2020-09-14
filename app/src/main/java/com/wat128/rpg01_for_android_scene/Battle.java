@@ -227,6 +227,7 @@ public class Battle extends AppCompatActivity {
 
         _hpView.setText(String.valueOf(_player.getHp()));
         _mpView.setText(String.valueOf(_player.getMp()));
+        _lvView.setText(String.valueOf(_player.getLv()));
         _skillTable.setVisibility(View.INVISIBLE);
     }
 
