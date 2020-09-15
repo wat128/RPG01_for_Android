@@ -207,9 +207,9 @@ public class Battle extends AppCompatActivity {
                 case S_Attack:
                     attackSkill(offence.battler, defense.battler, offence.skillIndex);
                     break;
-//                case S_Support:
-//                    supportSkill();
-//                    break;
+                case S_Support:
+                    supportSkill(offence.battler, offence.skillIndex);
+                    break;
                 case S_Recovery:
                     recoverySkill(offence.battler, offence.skillIndex);
                     break;
@@ -260,7 +260,7 @@ public class Battle extends AppCompatActivity {
 
     private void attackSkill(final Battler off, final Battler def, final int index) {
 
-        int damage = ( off.getAttack() + off.activateSkill(index) ) - def.getDefence(); //TODO: ダメージ計算式の修正
+        int damage = (int)(off.getAttack() + off.activateSkill(index)) - def.getDefence(); //TODO: ダメージ計算式の修正
         if (damage < 0)
             damage = 0;
 
@@ -269,9 +269,21 @@ public class Battle extends AppCompatActivity {
                 off.getName(), off.getSkill(index).getName(), def.getName(), damage));
     }
 
+    private void supportSkill(final Battler battler, final int index) {
+
+        float buf = battler.activateSkill(index);
+        if(buf < 0)
+            buf = 0;
+
+        final Skill skill = battler.getSkill(index);
+        battler.buf(buf, skill.getTargetStatus());
+        _msgBoxView.append(getString(R.string.skillSuppoerMsg,
+                battler.getName(), skill.getName()));
+    }
+
     private void recoverySkill(final Battler battler, final int index) {
 
-        int healing = battler.activateSkill(index);
+        int healing = (int)battler.activateSkill(index);
         if (healing < 0)
             healing = 0;
 
@@ -288,6 +300,7 @@ public class Battle extends AppCompatActivity {
         else {
 
             buttonEnabled();
+            _player.resetBuf();
             Intent intent = new Intent();
 
             // 以下条件式以降、battlerではなく、playerとenemyを直接使用する

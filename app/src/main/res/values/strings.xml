@@ -32,6 +32,7 @@
     <string name="attackMsg">%1$sの攻撃！\n%2$sに%3$dのダメージ！\n</string>
     <string name="skillAttackMsg">%1$sは%2$sを発動！\n%3$sに%4$dのダメージ！\n</string>
     <string name="skillRecoveryMsg">%1$sは%2$sを発動！\n%1$sは%3$dポイント回復！\n</string>
+    <string name="skillSuppoerMsg">%1$sは%2$sを発動！\n全神経を集中させた！\n</string>
     <string name="skill_unusable">MPが足りない！</string>
     <string name="recieveExp">%1$dポイントの経験値を獲得！\n</string>
     <string name="lvup">%1$sはレベルが%2$d上がった！\n</string>

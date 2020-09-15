@@ -40,6 +40,25 @@ public abstract class Battler {
         return false;
     }
 
+    public void buf(final float val, final TargetStatus target) {
+
+        switch (target) {
+            case Atk:   _status.atk.buf(val);   break;
+            case Def:   _status.def.buf(val);   break;
+            case Agi:   _status.agi.buf(val);   break;
+            case Mind:  _status.mind.buf(val);  break;
+            case Luk:   _status.luk.buf(val);   break;
+        }
+    }
+
+    public void resetBuf() {
+        _status.atk.reset();
+        _status.def.reset();
+        _status.agi.reset();
+        _status.mind.reset();
+        _status.luk.reset();
+    }
+
     public int growUp(final int exp) {
         return _status.growUp(exp);
     }
@@ -69,7 +88,7 @@ public abstract class Battler {
         return false;
     }
 
-    public int activateSkill(final int index) {
+    public float activateSkill(final int index) {
 
         if(isSkillAvailable(index)){
             Skill skill = _skills.get(index);
@@ -77,7 +96,7 @@ public abstract class Battler {
             return skill.getPower();
         }
 
-        return 0;
+        return 0f;
     }
 
     // バトルでの行動を決定する。通常攻撃なら-1, スキルならインデックスを返す。
