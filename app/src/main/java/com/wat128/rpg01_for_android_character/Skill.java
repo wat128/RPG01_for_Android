@@ -6,15 +6,6 @@ enum SkillId {
     Heal
 }
 
-enum TargetStatus {
-    None,
-    Atk,
-    Def,
-    Agi,
-    Mind,
-    Luk
-}
-
 public abstract class Skill {
     String _name;
     SkillId _id;
@@ -47,7 +38,7 @@ public abstract class Skill {
  */
 class Fire extends Skill {
     public Fire() {
-        super("火炎", SkillId.Fire, 10f, 3, Type.S_Attack, TargetStatus.None);
+        super("火炎", SkillId.Fire, 10f, 3, Type.S_Attack, TargetStatus.Mind);
     }
 }
 

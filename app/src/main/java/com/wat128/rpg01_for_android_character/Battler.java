@@ -116,7 +116,7 @@ public abstract class Battler {
     public int getAttack()          { return _status.atk.cur(); }
     public int getDefence()         { return _status.def.cur(); }
     public int getAgility()         { return _status.agi.cur(); }
-    public int getfloatelligense()  { return _status.mind.cur(); }
+    public int getMind()            { return _status.mind.cur(); }
     public int getLuck()            { return _status.luk.cur(); }
 }
 

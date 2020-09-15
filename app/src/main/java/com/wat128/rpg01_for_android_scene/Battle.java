@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -260,7 +261,14 @@ public class Battle extends AppCompatActivity {
 
     private void attackSkill(final Battler off, final Battler def, final int index) {
 
-        int damage = (int)(off.getAttack() + off.activateSkill(index)) - def.getDefence(); //TODO: ダメージ計算式の修正
+        int damage = 0;
+        final TargetStatus target = off.getSkill(index).getTargetStatus();
+
+        if(target == TargetStatus.Atk)
+            damage = (int)(off.getAttack() + off.activateSkill(index)) - def.getDefence(); //TODO: ダメージ計算式の修正
+        else if (target == TargetStatus.Mind)
+            damage = (int)(off.getMind() + off.activateSkill(index)) - def.getMind();   //TODO: ダメージ計算式の修正
+
         if (damage < 0)
             damage = 0;
 
