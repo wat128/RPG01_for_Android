@@ -31,10 +31,19 @@ class PlayerSkillList extends AcquireSkillList {
 
     public PlayerSkillList() {
         super(new ArrayList<AcquireSkill>(Arrays.asList(
-                new AcquireSkill(2, SkillId.Fire, false),
+                new AcquireSkill(1, SkillId.Fire, false),
                 new AcquireSkill(2, SkillId.Heal, false),
-                new AcquireSkill(2, SkillId.PowerUp, false)
-            )
+                new AcquireSkill(2, SkillId.PowerUp, false))
+        ));
+    }
+}
+
+class NineTailedFoxSkillList extends AcquireSkillList {
+
+    public NineTailedFoxSkillList() {
+        super(new ArrayList<AcquireSkill>(Arrays.asList(
+                new AcquireSkill(1, SkillId.Fire, false),
+                new AcquireSkill(1, SkillId.Heal, false),
         ));
     }
 }

@@ -1,7 +1,6 @@
 package com.wat128.rpg01_for_android_character;
 
 import android.util.Log;
-import static com.wat128.rpg01_for_android_character.BattlerList.*;
 
 public class EnemyFactory {
 
@@ -14,7 +13,7 @@ public class EnemyFactory {
                 enemy = new Enemy(new SlimeStatus());
                 break;
             case NINE_TAILED_FOX:
-                enemy = new Enemy(new NineTailStatus());
+                enemy = new Enemy(new NineTailedFoxStatus(), new NineTailedFoxSkillList());
                 break;
             default:
                 Log.d("debug", "EnemyFactory Failed");

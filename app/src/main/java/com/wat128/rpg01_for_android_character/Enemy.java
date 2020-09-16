@@ -6,5 +6,9 @@ public class Enemy extends Battler {
     public Enemy(Status status) {
          super(status);
     }
+
+    public Enemy(Status status, AcquireSkillList acquireSkills) {
+        super(status, acquireSkills);
+    }
 }
 

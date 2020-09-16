@@ -276,9 +276,9 @@ class SlimeStatus extends Status {
     }
 }
 
-class NineTailStatus extends Status {
+class NineTailedFoxStatus extends Status {
 
-    NineTailStatus() {
+    NineTailedFoxStatus() {
         super(
                 "キュウビ",
                 R.drawable.nine_taled_fox,

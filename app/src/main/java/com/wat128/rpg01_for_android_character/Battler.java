@@ -1,6 +1,7 @@
 package com.wat128.rpg01_for_android_character;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Battler {
 
@@ -10,7 +11,7 @@ public abstract class Battler {
 
     public Battler(Status status) {
         _status = status;
-        _skills = new ArrayList<>();
+        _skills = null;
         _acquireSkills = null;
     }
 
@@ -18,6 +19,7 @@ public abstract class Battler {
         _status = status;
         _skills = new ArrayList<>();
         _acquireSkills = acquireSkills;
+        pickUpNewSkill();
     }
 
     public void fullRecovery() {
@@ -60,10 +62,39 @@ public abstract class Battler {
     }
 
     public int growUp(final int exp) {
-        return _status.growUp(exp);
+
+        final int growUpNum = _status.growUp(exp);;
+        if(growUpNum <= 0)
+            return growUpNum;
+
+        pickUpNewSkill();
+
+        return growUpNum;
+    }
+
+    public void pickUpNewSkill() {
+
+        if(_acquireSkills == null)
+            return;
+
+        for(int i = 0; i < _acquireSkills.size; i++) {
+            AcquireSkill data = _acquireSkills.list.get(i);
+
+            if(data.acquired)
+                continue;
+
+            if(_status.lv.val() >= data.lv) {
+                _skills.add(SkillFactory.create(data.skillId));
+                data.acquired = true;
+            }
+        }
     }
 
     public ArrayList<String> getSkillsName() {
+
+        if(_skills == null)
+            return null;
+
         ArrayList<String> skillsName = new ArrayList<>();
 
         for(Skill skill : _skills) {
@@ -75,13 +106,17 @@ public abstract class Battler {
 
     public Skill getSkill(final int index) {
 
-        if(index < 0)
+        if(index < 0 || _skills == null)
             return null;
 
         return _skills.get(index);
     }
 
     public boolean isSkillAvailable(final int index) {
+
+        if(index < 0 || _skills == null)
+            return false;
+
         if(_status.mp.cur() >= _skills.get(index).getMp())
             return true;
 
@@ -102,7 +137,18 @@ public abstract class Battler {
     // バトルでの行動を決定する。通常攻撃なら-1, スキルならインデックスを返す。
     // スキル発動はインデックスを使用して別メソッドのコールが必要
     public int decideToAction() {
-        return -1;  // TODO;実装
+
+        if(_skills == null)
+            return -1;
+
+        Random random = new Random();
+
+        // スキル数+1 で 通常攻撃とスキル数を合わせた値。その後の-1で_skillのindexに合わせる
+        final int index = random.nextInt(_skills.size() + 1) - 1;
+        if(!isSkillAvailable(index))
+            return -1;
+
+        return index;
     }
 
 
