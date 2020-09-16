@@ -20,6 +20,7 @@ import com.wat128.rpg01_for_android_character.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Battle extends AppCompatActivity {
 
@@ -251,7 +252,10 @@ public class Battle extends AppCompatActivity {
 
     private void normalAttack(final Battler off, final Battler def) {
 
-        int damage = off.getAttack() - def.getDefence(); //TODO: ダメージ計算式の修正
+        Random random = new Random();
+        final int rndNum = random.nextInt(55) + 99;
+
+        int damage = (int)((off.getAttack() - (def.getDefence() / 2)) * rndNum / 256);
         if (damage < 0)
             damage = 0;
 
@@ -264,10 +268,13 @@ public class Battle extends AppCompatActivity {
         int damage = 0;
         final TargetStatus target = off.getSkill(index).getTargetStatus();
 
+        Random random = new Random();
+        final int rndNum = random.nextInt(55) + 99;
+
         if(target == TargetStatus.Atk)
-            damage = (int)(off.getAttack() + off.activateSkill(index)) - def.getDefence(); //TODO: ダメージ計算式の修正
+            damage = (int)((off.getAttack() + off.activateSkill(index) - (def.getDefence() / 2)) * rndNum / 256);
         else if (target == TargetStatus.Mind)
-            damage = (int)(off.getMind() + off.activateSkill(index)) - def.getMind();   //TODO: ダメージ計算式の修正
+            damage = (int)((off.getMind() + off.activateSkill(index) - (def.getMind() / 2)) * rndNum / 256);
 
         if (damage < 0)
             damage = 0;
