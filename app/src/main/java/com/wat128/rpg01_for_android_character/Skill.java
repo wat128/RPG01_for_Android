@@ -82,12 +82,12 @@ class Fire extends Skill {
 
 class PowerUp extends Skill {
     public PowerUp() {
-        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support, TargetStatus.Atk, R.raw.skill_fire); // TODO:スキルアニメーション変更
+        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support, TargetStatus.Atk, R.raw.skill_powerup);
     }
 }
 
 class Heal extends Skill {
     public Heal() {
-        super("ヒール", SkillId.Heal, 30f, 5, Type.S_Recovery, TargetStatus.None, R.raw.skill_fire); // TODO:スキルアニメーション変更
+        super("ヒール", SkillId.Heal, 30f, 5, Type.S_Recovery, TargetStatus.None, R.raw.skill_heal);
     }
 }
