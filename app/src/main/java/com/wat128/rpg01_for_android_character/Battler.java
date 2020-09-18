@@ -1,5 +1,9 @@
 package com.wat128.rpg01_for_android_character;
 
+import android.media.Image;
+import android.widget.ImageView;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,11 +12,13 @@ public abstract class Battler {
     Status _status;
     ArrayList<Skill> _skills;
     AcquireSkillList _acquireSkills;
+    WeakReference<ImageView> _skillAnimationView;
 
     public Battler(Status status) {
         _status = status;
         _skills = null;
         _acquireSkills = null;
+        _skillAnimationView = null;
     }
 
     public Battler(Status status, AcquireSkillList acquireSkills) {
@@ -20,6 +26,7 @@ public abstract class Battler {
         _skills = new ArrayList<>();
         _acquireSkills = acquireSkills;
         pickUpNewSkill();
+        _skillAnimationView = null;
     }
 
     public void fullRecovery() {
@@ -127,6 +134,9 @@ public abstract class Battler {
 
         if(isSkillAvailable(index)){
             Skill skill = _skills.get(index);
+            if(_skillAnimationView != null)
+                skill.performAnimation(_skillAnimationView.get());
+
             _status.mp.decrease(skill.getMp());
             return skill.getPower();
         }
@@ -151,6 +161,9 @@ public abstract class Battler {
         return index;
     }
 
+    public void setSkillAnimationView(final ImageView view) {
+        _skillAnimationView = new WeakReference<ImageView>(view);
+    }
 
     public String getName()         { return _status.name; }
     public int getImageId()         { return _status.imageId; }

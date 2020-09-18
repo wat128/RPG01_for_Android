@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -50,6 +49,7 @@ public class Battle extends AppCompatActivity {
         Intent intent = getIntent();
 
         _player = Player.getInstance();
+        _player.setSkillAnimationView((ImageView)findViewById(R.id.animation));
         _battlers = new ArrayList<>();
 
         _hpView = findViewById(R.id.hp_val);
