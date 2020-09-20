@@ -1,7 +1,17 @@
 package com.wat128.rpg01_for_android_character;
 
-import android.media.Image;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -12,13 +22,15 @@ public abstract class Battler {
     Status _status;
     ArrayList<Skill> _skills;
     AcquireSkillList _acquireSkills;
-    WeakReference<ImageView> _skillAnimationView;
+    int _normalAttackAnime;
+    WeakReference<ImageView> _actionAnimationView;
 
     public Battler(Status status) {
         _status = status;
         _skills = null;
         _acquireSkills = null;
-        _skillAnimationView = null;
+        _normalAttackAnime = 0;
+        _actionAnimationView = null;
     }
 
     public Battler(Status status, AcquireSkillList acquireSkills) {
@@ -26,7 +38,8 @@ public abstract class Battler {
         _skills = new ArrayList<>();
         _acquireSkills = acquireSkills;
         pickUpNewSkill();
-        _skillAnimationView = null;
+        _normalAttackAnime = 0;
+        _actionAnimationView = null;
     }
 
     public void fullRecovery() {
@@ -134,14 +147,36 @@ public abstract class Battler {
 
         if(isSkillAvailable(index)){
             Skill skill = _skills.get(index);
-            if(_skillAnimationView != null)
-                skill.performAnimation(_skillAnimationView.get());
+            if(_actionAnimationView != null)
+                skill.performAnimation(_actionAnimationView.get());
 
             _status.mp.decrease(skill.getMp());
             return skill.getPower();
         }
 
         return 0f;
+    }
+
+    public int normalAttack(final Context context) {
+        if(_actionAnimationView != null && _normalAttackAnime != 0) {
+            Glide.with(context)
+                    .load(_normalAttackAnime)
+                    .addListener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            ((GifDrawable)resource).setLoopCount(1);
+                            return false;
+                        }
+                    })
+                    .into(_actionAnimationView.get());
+        }
+
+        return getAttack();
     }
 
     // バトルでの行動を決定する。通常攻撃なら-1, スキルならインデックスを返す。
@@ -162,7 +197,7 @@ public abstract class Battler {
     }
 
     public void setSkillAnimationView(final ImageView view) {
-        _skillAnimationView = new WeakReference<ImageView>(view);
+        _actionAnimationView = new WeakReference<ImageView>(view);
     }
 
     public String getName()         { return _status.name; }

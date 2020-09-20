@@ -26,6 +26,7 @@ public class Player extends Battler {
 
     private Player() {
         super(new playerStatus(), new PlayerSkillList());
+        super._normalAttackAnime = R.raw.attack_01;
         _chara = null;
         _direction = Direction.Down;
         _move = new Move();

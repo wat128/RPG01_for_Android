@@ -255,7 +255,7 @@ public class Battle extends AppCompatActivity {
         Random random = new Random();
         final int rndNum = random.nextInt(55) + 99;
 
-        int damage = (int)((off.getAttack() - (def.getDefence() / 2)) * rndNum / 256);
+        int damage = (int)((off.normalAttack(this.getApplicationContext()) - (def.getDefence() / 2)) * rndNum / 256);
         if (damage < 0)
             damage = 0;
 
