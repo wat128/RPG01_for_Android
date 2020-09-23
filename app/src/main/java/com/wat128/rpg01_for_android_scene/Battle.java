@@ -1,6 +1,9 @@
 package com.wat128.rpg01_for_android_scene;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.wat128.rpg01_for_android.R;
 import com.wat128.rpg01_for_android_character.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -40,6 +44,9 @@ public class Battle extends AppCompatActivity {
     private TextView _lvView;
 
     private TableLayout _skillTable;
+
+    private MediaPlayer _mediaPlayer;
+    private String bgmFilePath = "game_maoudamashii_1_battle34.mp3";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,6 +119,8 @@ public class Battle extends AppCompatActivity {
 
             }
         });
+
+        bgmPlay();
 
     }
 
@@ -352,9 +361,56 @@ public class Battle extends AppCompatActivity {
         return true;
     }
 
+    private void bgmSetup() {
+
+        _mediaPlayer = new MediaPlayer();
+
+        try(AssetFileDescriptor afdescripter = getAssets().openFd(bgmFilePath);) {
+
+            _mediaPlayer.setDataSource(afdescripter.getFileDescriptor(),
+                    afdescripter.getStartOffset(),
+                    afdescripter.getLength());
+
+            setVolumeControlStream(AudioManager.STREAM_MUSIC);
+            _mediaPlayer.prepare();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void bgmPlay() {
+
+        if(_mediaPlayer == null) {
+            bgmSetup();
+        }
+
+        _mediaPlayer.start();
+
+        _mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                bgmStop();
+                bgmPlay();
+            }
+        });
+    }
+
+    private void bgmStop() {
+        _mediaPlayer.stop();
+        _mediaPlayer.reset();
+        _mediaPlayer.release();
+        _mediaPlayer = null;
+    }
+
     @Override
     public void onBackPressed() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bgmStop();
     }
 }
 
