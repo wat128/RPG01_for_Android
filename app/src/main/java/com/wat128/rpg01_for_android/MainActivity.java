@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.wat128.rpg01_for_android.Util.*;
+import com.wat128.rpg01_for_android_character.SoundEffect;
 import com.wat128.rpg01_for_android_scene.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // 効果音を事前にロードしておく
+        SoundEffect.getInstance();
     }
 
     @Override

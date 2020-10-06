@@ -5,7 +5,7 @@ import android.app.Application;
 // Context取得用
 public class MyAppContext extends Application {
 
-    private static MyAppContext instance = null;
+    private static MyAppContext instance;
 
     @Override
     public void onCreate() {
@@ -15,6 +15,10 @@ public class MyAppContext extends Application {
     }
 
     public static MyAppContext getInstance() {
+
+        if(instance == null)
+            instance = new MyAppContext();
+
         return instance;
     }
 }

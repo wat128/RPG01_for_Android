@@ -150,6 +150,7 @@ public abstract class Battler {
             if(_actionAnimationView != null)
                 skill.performAnimation(_actionAnimationView.get());
 
+            skill.playSound(skill._soundId);
             _status.mp.decrease(skill.getMp());
             return skill.getPower();
         }
@@ -175,6 +176,8 @@ public abstract class Battler {
                     })
                     .into(_actionAnimationView.get());
         }
+
+        SoundEffect.getInstance().play(SoundEffect.Id.ATTACK01);
 
         return getAttack();
     }
