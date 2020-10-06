@@ -16,8 +16,9 @@ import java.util.Map;
 // 2.addSound()に追加
 public class SoundEffect {
 
-    enum Id {
+    public enum Id {
         ATTACK01,
+        ESCAPE,
         FIRE,
         POWERUP,
         HEAL
@@ -58,6 +59,10 @@ public class SoundEffect {
         soundList.put(
                 Id.ATTACK01,
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_attack_kurage_attack01, 1));
+
+        soundList.put(
+                Id.ESCAPE,
+                soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_escape_kurage_esc01, 1));
 
         soundList.put(
                 Id.FIRE,

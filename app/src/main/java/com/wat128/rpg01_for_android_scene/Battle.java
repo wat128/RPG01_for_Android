@@ -103,6 +103,7 @@ public class Battle extends AppCompatActivity {
                 buttonEnabled();
                 _skillTable.setVisibility(View.INVISIBLE);
                 _msgBoxView.setText(getString(R.string.succes_escape, _player.getName()));
+                SoundEffect.getInstance().play(SoundEffect.Id.ESCAPE);
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
