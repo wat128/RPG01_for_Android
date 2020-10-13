@@ -18,11 +18,11 @@ public class SoundEffect {
 
     public enum Id {
         ATTACK01,
-        ESCAPE,
-        FIRE,
-        BUF,
-        DEBUF,
-        HEAL
+        ESCAPE01,
+        FIRE01,
+        BUF01,
+        DEBUF01,
+        HEAL01
     }
 
     private SoundPool soundPool;
@@ -62,23 +62,23 @@ public class SoundEffect {
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_attack_kurage_attack01, 1));
 
         soundList.put(
-                Id.ESCAPE,
+                Id.ESCAPE01,
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_escape_kurage_esc01, 1));
 
         soundList.put(
-                Id.FIRE,
+                Id.FIRE01,
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_fire_kurage_sburst02, 1));
 
         soundList.put(
-                Id.BUF,
+                Id.BUF01,
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_buf_maodama_magic10, 1));
 
         soundList.put(
-                Id.DEBUF,
+                Id.DEBUF01,
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_debuf_kurage_status02, 1));
 
         soundList.put(
-                Id.HEAL,
+                Id.HEAL01,
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_heal_kurage_heal02, 1));
     }
 }

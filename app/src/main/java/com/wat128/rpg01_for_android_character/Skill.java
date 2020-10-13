@@ -87,24 +87,24 @@ public abstract class Skill {
  */
 class Fire extends Skill {
     public Fire() {
-        super("火炎", SkillId.Fire, 10f, 3, Type.S_Attack, TargetStatus.Mind, R.raw.skill_fire, FIRE);
+        super("火炎", SkillId.Fire, 10f, 3, Type.S_Attack, TargetStatus.Mind, R.raw.skill_fire, FIRE01);
     }
 }
 
 class PowerUp extends Skill {
     public PowerUp() {
-        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Atk, R.raw.skill_buf, BUF);
+        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Atk, R.raw.skill_buf, BUF01);
     }
 }
 
 class PowerDown extends Skill {
     public PowerDown() {
-        super("パワーダウン", SkillId.PowerDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Atk, R.raw.skill_debuf, DEBUF);
+        super("パワーダウン", SkillId.PowerDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Atk, R.raw.skill_debuf, DEBUF01);
     }
 }
 
 class Heal extends Skill {
     public Heal() {
-        super("ヒール", SkillId.Heal, 30f, 5, Type.S_Recovery, TargetStatus.None, R.raw.skill_heal, HEAL);
+        super("ヒール", SkillId.Heal, 30f, 5, Type.S_Recovery, TargetStatus.None, R.raw.skill_heal, HEAL01);
     }
 }
