@@ -33,7 +33,8 @@ class PlayerSkillList extends AcquireSkillList {
         super(new ArrayList<AcquireSkill>(Arrays.asList(
                 new AcquireSkill(1, SkillId.Fire, false),
                 new AcquireSkill(2, SkillId.Heal, false),
-                new AcquireSkill(2, SkillId.PowerUp, false))
+                new AcquireSkill(2, SkillId.PowerUp, false),
+                new AcquireSkill(2, SkillId.PowerDown, false))
         ));
     }
 }

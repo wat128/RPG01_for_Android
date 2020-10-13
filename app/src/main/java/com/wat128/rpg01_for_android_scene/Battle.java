@@ -219,8 +219,11 @@ public class Battle extends AppCompatActivity {
                 case S_Attack:
                     attackSkill(offence.battler, defense.battler, offence.skillIndex);
                     break;
-                case S_Support:
+                case S_Support_Me:
                     supportSkill(offence.battler, offence.skillIndex);
+                    break;
+                case S_Support_Other:
+                    supportSkill(offence.battler, defense.battler, offence.skillIndex);
                     break;
                 case S_Recovery:
                     recoverySkill(offence.battler, offence.skillIndex);
@@ -250,10 +253,11 @@ public class Battle extends AppCompatActivity {
         }
         else {
             switch (skill.getType()) {
-                case S_Attack:      actionType = Type.S_Attack;    break;
-                case S_Support:     actionType = Type.S_Support;   break;
-                case S_Recovery:    actionType = Type.S_Recovery;  break;
-                default:            actionType = Type.N_Attack;    break;
+                case S_Attack:          actionType = Type.S_Attack;         break;
+                case S_Support_Me:      actionType = Type.S_Support_Me;     break;
+                case S_Support_Other:   actionType = Type.S_Support_Other;  break;
+                case S_Recovery:        actionType = Type.S_Recovery;       break;
+                default:                actionType = Type.N_Attack;         break;
             }
         }
 
@@ -294,16 +298,30 @@ public class Battle extends AppCompatActivity {
                 off.getName(), off.getSkill(index).getName(), def.getName(), damage));
     }
 
+    // 主に自分に対するバフなどを担当
     private void supportSkill(final Battler battler, final int index) {
 
         float buf = battler.activateSkill(index);
         if(buf < 0)
-            buf = 0;
+            buf = 1;
 
         final Skill skill = battler.getSkill(index);
         battler.buf(buf, skill.getTargetStatus());
         _msgBoxView.append(getString(R.string.skillSuppoerMsg,
                 battler.getName(), skill.getName()));
+    }
+
+    // 主に相手に対するデバフなどを担当
+    private void supportSkill(final Battler off, final Battler def, final int index) {
+
+        float buf = off.activateSkill(index);
+        if(buf < 0)
+            buf = 1;
+
+        final Skill skill = off.getSkill(index);
+        def.buf(buf, skill.getTargetStatus());
+        _msgBoxView.append(getString(R.string.skillSupportMsg_debuf,
+                off.getName(), skill.getName(), def.getName()));
     }
 
     private void recoverySkill(final Battler battler, final int index) {

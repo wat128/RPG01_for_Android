@@ -20,7 +20,8 @@ public class SoundEffect {
         ATTACK01,
         ESCAPE,
         FIRE,
-        POWERUP,
+        BUF,
+        DEBUF,
         HEAL
     }
 
@@ -69,8 +70,12 @@ public class SoundEffect {
                 soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_fire_kurage_sburst02, 1));
 
         soundList.put(
-                Id.POWERUP,
-                soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_powerup_maodama_magic10, 1));
+                Id.BUF,
+                soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_buf_maodama_magic10, 1));
+
+        soundList.put(
+                Id.DEBUF,
+                soundPool.load(MyAppContext.getInstance().getApplicationContext(), R.raw.s_skill_debuf_kurage_status02, 1));
 
         soundList.put(
                 Id.HEAL,

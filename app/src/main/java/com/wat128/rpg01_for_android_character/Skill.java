@@ -18,6 +18,7 @@ import static com.wat128.rpg01_for_android_character.SoundEffect.Id.*;
 enum SkillId {
     Fire,
     PowerUp,
+    PowerDown,
     Heal
 }
 
@@ -92,7 +93,13 @@ class Fire extends Skill {
 
 class PowerUp extends Skill {
     public PowerUp() {
-        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support, TargetStatus.Atk, R.raw.skill_powerup, POWERUP);
+        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Atk, R.raw.skill_buf, BUF);
+    }
+}
+
+class PowerDown extends Skill {
+    public PowerDown() {
+        super("パワーダウン", SkillId.PowerDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Atk, R.raw.skill_debuf, DEBUF);
     }
 }
 

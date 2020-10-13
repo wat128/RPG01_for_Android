@@ -17,6 +17,9 @@ class SkillFactory {
             case PowerUp:
                 skill = new PowerUp();
                 break;
+            case PowerDown:
+                skill = new PowerDown();
+                break;
             default:
                 Log.d("debug", "SkillFactory Failed");
                 skill = null;
