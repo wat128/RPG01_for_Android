@@ -26,6 +26,12 @@ class SkillFactory {
             case MindDown:
                 skill = new MindDown();
                 break;
+            case GuardUp:
+                skill = new GuardUp();
+                break;
+            case GuardDown:
+                skill = new GuardDown();
+                break;
             default:
                 Log.d("debug", "SkillFactory Failed");
                 skill = null;
