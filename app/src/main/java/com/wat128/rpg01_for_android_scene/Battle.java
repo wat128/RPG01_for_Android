@@ -133,16 +133,36 @@ public class Battle extends AppCompatActivity {
 
         final int skillNum = skillsName.size();
 
+        // 行計算
         int loopMax = 0;
         if      (skillNum <= 3) loopMax = 1;
         else if (skillNum <= 6) loopMax = 2;
         else if (skillNum <= 9) loopMax = 3;
 
-        for(int i = 0; i < loopMax; i++) {
+        // 最終行の技数計算
+        final int maxSkillNumOfRow = 3;
+        int lastRowSkills = 0;
+        if(skillNum % maxSkillNumOfRow == 0)
+            lastRowSkills = maxSkillNumOfRow;
+        else
+            lastRowSkills = skillNum % maxSkillNumOfRow;
+
+        // スキルテープルへ技を設定
+        int skillIndex = 0;
+        for(int column = 0; column < loopMax; column++) {
             TableRow row = new TableRow(this);
             _skillTable.addView(row);
-            for(int index = 0; index < skillsName.size(); index++) {
-                row.addView(createSkillButton(skillsName.get(index), index));
+
+            // 最終行かを判定し、列のループ回数を判別
+            int rowLoopNum = 0;
+            if(column == loopMax - 1)
+                rowLoopNum = lastRowSkills;
+            else
+                rowLoopNum = maxSkillNumOfRow;
+
+            for(int rowIndex = 0; rowIndex < rowLoopNum; rowIndex++){
+                row.addView((createSkillButton(skillsName.get(skillIndex), skillIndex)));
+                ++skillIndex;
             }
         }
     }
