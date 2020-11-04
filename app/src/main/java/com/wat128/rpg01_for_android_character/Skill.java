@@ -81,8 +81,8 @@ public abstract class Skill {
 /*　作成日：2020/09/18　追記：2020/10/06
 
     スキル追加時の必要手順
-    1. Skillクラスを継承する（例：Fire）
-    2. SkillIdに新規スキル名のIDを追加
+    1. Skillクラスを継承する（例：Fire）　※：スキル名は上限３文字とする
+    2. SkillIdに新規スキルのIDを追加
     3. SkillFactoryに新規スキルを追加
     4. SoundEffect.IdとaddSound()に内容追加
 
@@ -97,37 +97,37 @@ class Fire extends Skill {
 
 class PowerUp extends Skill {
     public PowerUp() {
-        super("パワーアップ", SkillId.PowerUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Atk, R.raw.skill_buf, BUF01);
+        super("パワア", SkillId.PowerUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Atk, R.raw.skill_buf, BUF01);
     }
 }
 
 class PowerDown extends Skill {
     public PowerDown() {
-        super("パワーダウン", SkillId.PowerDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Atk, R.raw.skill_debuf, DEBUF01);
+        super("パワダ", SkillId.PowerDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Atk, R.raw.skill_debuf, DEBUF01);
     }
 }
 
 class MindUp extends Skill {
     public MindUp() {
-        super("マインドアップ", SkillId.MindUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Mind, R.raw.skill_buf, BUF01);
+        super("マイア", SkillId.MindUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Mind, R.raw.skill_buf, BUF01);
     }
 }
 
 class MindDown extends Skill {
     public MindDown() {
-        super("マインドダウン", SkillId.MindDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Mind, R.raw.skill_debuf, DEBUF01);
+        super("マイダ", SkillId.MindDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Mind, R.raw.skill_debuf, DEBUF01);
     }
 }
 
 class GuardUp extends Skill {
     public GuardUp() {
-        super("ガードアップ", SkillId.GuardUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Def, R.raw.skill_buf, BUF01);
+        super("ガドア", SkillId.GuardUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Def, R.raw.skill_buf, BUF01);
     }
 }
 
 class GuardDown extends Skill {
     public GuardDown() {
-        super("ガードダウン", SkillId.GuardDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Def, R.raw.skill_debuf, DEBUF01);
+        super("ガドダ", SkillId.GuardDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Def, R.raw.skill_debuf, DEBUF01);
     }
 }
 
