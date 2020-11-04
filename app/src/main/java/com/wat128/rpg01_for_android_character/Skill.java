@@ -23,6 +23,8 @@ enum SkillId {
     MindDown,
     GuardUp,
     GuardDown,
+    SpeedUp,
+    SpeedDown,
     Heal
 }
 
@@ -119,6 +121,17 @@ class MindDown extends Skill {
     }
 }
 
+class SpeedUp extends Skill {
+    public SpeedUp() {
+        super("スピア", SkillId.GuardUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Agi, R.raw.skill_buf, BUF01);
+    }
+}
+
+class SpeedDown extends Skill {
+    public SpeedDown() {
+        super("スピダ", SkillId.GuardDown, 0.7f, 4, Type.S_Support_Other, TargetStatus.Agi, R.raw.skill_debuf, DEBUF01);
+    }
+}
 class GuardUp extends Skill {
     public GuardUp() {
         super("ガドア", SkillId.GuardUp, 1.3f, 4, Type.S_Support_Me, TargetStatus.Def, R.raw.skill_buf, BUF01);
