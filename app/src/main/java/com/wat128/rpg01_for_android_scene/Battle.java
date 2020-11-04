@@ -128,68 +128,45 @@ public class Battle extends AppCompatActivity {
     private void initSkillTable() {
 
         _skillTable = findViewById(R.id.skill_button_table);
-        ArrayList<String> skillsName = new ArrayList<>();
-        skillsName = _player.getSkillsName();
 
+        ArrayList<String> skillsName;
+        skillsName = _player.getSkillsName();
         final int skillNum = skillsName.size();
 
-        // 行計算
-        int loopMax = 0;
-        if      (skillNum <= 3) loopMax = 1;
-        else if (skillNum <= 6) loopMax = 2;
-        else if (skillNum <= 9) loopMax = 3;
+        for(int i = 0; i < skillNum; i++) {
 
-        // 最終行の技数計算
-        final int maxSkillNumOfRow = 3;
-        int lastRowSkills = 0;
-        if(skillNum % maxSkillNumOfRow == 0)
-            lastRowSkills = maxSkillNumOfRow;
-        else
-            lastRowSkills = skillNum % maxSkillNumOfRow;
-
-        // スキルテープルへ技を設定
-        int skillIndex = 0;
-        for(int column = 0; column < loopMax; column++) {
-            TableRow row = new TableRow(this);
-            _skillTable.addView(row);
-
-            // 最終行かを判定し、列のループ回数を判別
-            int rowLoopNum = 0;
-            if(column == loopMax - 1)
-                rowLoopNum = lastRowSkills;
-            else
-                rowLoopNum = maxSkillNumOfRow;
-
-            for(int rowIndex = 0; rowIndex < rowLoopNum; rowIndex++){
-                row.addView((createSkillButton(skillsName.get(skillIndex), skillIndex)));
-                ++skillIndex;
+            Button skillBtn = null;
+            switch (i) {
+                case 0: skillBtn = findViewById(R.id.s1);  break;
+                case 1: skillBtn = findViewById(R.id.s2);  break;
+                case 2: skillBtn = findViewById(R.id.s3);  break;
+                case 3: skillBtn = findViewById(R.id.s4);  break;
+                case 4: skillBtn = findViewById(R.id.s5);  break;
+                case 5: skillBtn = findViewById(R.id.s6);  break;
+                case 6: skillBtn = findViewById(R.id.s7);  break;
+                case 7: skillBtn = findViewById(R.id.s8);  break;
+                case 8: skillBtn = findViewById(R.id.s9);  break;
+                default:    break;
             }
-        }
-    }
 
-    private Button createSkillButton(final String skillName, final int index) {
+            if(skillBtn == null)
+                return;
 
-        Button button = new Button(this);
-        TableLayout.LayoutParams buttonLayoutParams = new TableLayout.LayoutParams(
-                0,
-                TableLayout.LayoutParams.WRAP_CONTENT
-        );
-        buttonLayoutParams.weight = 1;
-
-        button.setText(skillName);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(_player.isSkillAvailable(index))
-                    BattleStart(index);
-                else {
-                    _skillTable.setVisibility(View.INVISIBLE);
-                    _msgBoxView.setText(getString(R.string.skill_unusable));
+            final int skillIndex = i;   // ビルドエラー対応のためfinalで保持（内部クラスアクセス）
+            skillBtn.setVisibility(View.VISIBLE);
+            skillBtn.setText(skillsName.get(skillIndex));
+            skillBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(_player.isSkillAvailable(skillIndex))
+                        BattleStart(skillIndex);
+                    else {
+                        _skillTable.setVisibility(View.INVISIBLE);
+                        _msgBoxView.setText(getString(R.string.skill_unusable));
+                    }
                 }
-            }
-        });
-        return button;
+            });
+        }
     }
 
     private void buttonEnabled() {
