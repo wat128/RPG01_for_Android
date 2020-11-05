@@ -74,6 +74,9 @@ public class Player extends Battler {
 
     private void setPos(final Direction direction, final int boundary) {
 
+        Log.d("debud", "PlayerX : " + _chara.getX());
+        Log.d("debud", "PlayerY : " + _chara.getY());
+
         final float curPos;
         final float offset;
 
